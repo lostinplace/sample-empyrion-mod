@@ -12,17 +12,32 @@ public class EPM : ModInterface {
     const string cIP = "127.0.0.1";
     const int cPort = 12345;
 
-    ModGameAPI GameAPI;
+    static ModGameAPI GameAPI;
     //float lastTime;
     //HashSet<int> players = new HashSet<int>();
     ModThreadHelper.Info connectToServerThread;
     volatile ModProtocol client;
     List<ModProtocol.Package> receivedPackages = new List<ModProtocol.Package>();
     List<ModProtocol.Package> receivedPackagesTemp = new List<ModProtocol.Package>();
+    ModTCPServer server;
+
+    public static void output(string s)
+    {
+        GameAPI.Console_Write(s);
+        
+    }
+
+    private void startModServer()
+    {
+        output("Starting server");
+        server = new ModTCPServer();
+        server.StartListen(PackageReceivedDelegate);
+    }
 
     public void Game_Start(ModGameAPI gameAPI) {
         GameAPI = gameAPI;
         GameAPI.Console_Write("Game start");
+        startModServer();
         connectToServerThread = ModThreadHelper.StartThread(ThreadConnectToServer, System.Threading.ThreadPriority.Lowest);
     }
 
@@ -81,20 +96,11 @@ public class EPM : ModInterface {
 
     public void Game_Exit() {
         GameAPI.Console_Write("Game exit");
-        if (client != null) {
-            client.Close();
-        }
-        connectToServerThread.WaitForEnd();
+        server.Close();
     }
 
     public void Game_Event(CmdId cmdId, ushort seqNr, object data) {
-        //GameAPI.Console_Write("Game event: c=" + cmdId + " sNr=" + seqNr + " d=" + data + " client="+client);
-        // Send events of the network
-        ModProtocol c = client;
-        if (c != null) {
-            ModProtocol.Package p = new ModProtocol.Package(cmdId, 0, seqNr, data);
-            c.AddToSendQueue(p);
-        }
+        server.SendRequest(cmdId, seqNr, data);
     }
 }
  

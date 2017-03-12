@@ -83,7 +83,6 @@
       <Link>helper classes\ModLog.cs</Link>
     </Compile>
     <Compile Include="client\Client.cs" />
-    <Compile Include="PacketProcessor.cs" />
     <Compile Include="helper classes\Interface.cs" />
     <Compile Include="helper classes\MainWindowDataContext.cs" />
     <Compile Include="helper classes\ObservableClass.cs" />

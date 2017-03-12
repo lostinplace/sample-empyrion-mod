@@ -8,33 +8,12 @@ namespace Empyrion_Mod_Server
     {
         static List<int> playerIds = new List<int>();
         static List<string> playfields = new List<string>();
-        static ModTCPServer server;
-
-        private void startModServer()
-        {
-            output("Starting server");
-            server = new ModTCPServer();
-            server.StartListen(packageReceivedDelegate);
-        }
-
-        private void stopModServer()
-        {
-            output("Stoping server");
-            if (server != null)
-            {
-                server.Close();
-            }
-            server = null;
-        }
 
         #region  "Send Requests to Game"        
         private void SendRequest(Eleon.Modding.CmdId cmdID, Eleon.Modding.CmdId seqNr, object data)
         {
-            output(string.Format("SendRequest: Command {0} SeqNr: {1}", cmdID, seqNr));
-            if (server != null)
-            {
-                server.SendRequest(cmdID, (ushort)seqNr, data);
-            }
+            output(string.Format("SendRequest: Command {0} SeqNr: {1}", cmdID, seqNr));    
+            client.Send(cmdID, (ushort)seqNr, data);
         }
 
         private void Get_PlayerList()
@@ -183,7 +162,7 @@ namespace Empyrion_Mod_Server
 
         #region  "Recieve Data from Game"        
         //This function receives all data from the game
-        private void packageReceivedDelegate(ModProtocol con, ModProtocol.Package p)
+        public void onGameEvent(ModProtocol.Package p)
         {
             try
             {

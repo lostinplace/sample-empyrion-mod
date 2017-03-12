@@ -8,17 +8,18 @@ namespace Empyrion_Mod_Server
     {
         private Timer aTimer;
         private int counter;
+        private client.Client client;
 
         public MainWindow()
         {
             InitializeComponent();
+            client = new client.Client();
+            client.GameEventReceived += onGameEvent;
+            client.ClientMessages += output;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            startModServer();
-
-            System.Threading.Thread.Sleep(1000);
 
             //Reload all Online Player and Playfields
             Get_PlayfieldList();
@@ -34,7 +35,7 @@ namespace Empyrion_Mod_Server
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            stopModServer();
+            client.Disconnect();
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -154,8 +155,8 @@ namespace Empyrion_Mod_Server
                 var player = ((data.PlayerInfo)dgPlayer.SelectedItem);
                 var oldPlayfield = player.playfield;
 
-                windows.ChangeLocation wdChangeLocation = new windows.ChangeLocation();
-                wdChangeLocation.DataContext = player;
+                windows.ChangeLocation wdChangeLocation = new windows.ChangeLocation { DataContext = player };
+                
                 if (wdChangeLocation.ShowDialog() == true)
                 {
                     if (player.playfield != oldPlayfield)

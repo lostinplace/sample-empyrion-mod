@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Eleon.Modding;
 
 public class ModTCPServer {
 
@@ -16,18 +17,19 @@ public class ModTCPServer {
 	List<ModProtocol> clients = new List<ModProtocol>();
 
     ModProtocol.DelegatePackageReceived packageReceivedDelegate;
+    ModGameAPI gameAPI;
 
-    public ModTCPServer() {
-	}
+    public ModTCPServer(ModGameAPI api) {
+        gameAPI = api;
+    }
 
 	public void StartListen(ModProtocol.DelegatePackageReceived nPackageReceivedDelegate) {
-
         try
         {
             packageReceivedDelegate = nPackageReceivedDelegate;
             tcpListener = new TcpListener(IPAddress.Parse(cIP), cPort);
             listenThread = ModThreadHelper.StartThread(ListenForConnections, System.Threading.ThreadPriority.Lowest);
-		    Console.WriteLine("Now listening on port " + cPort);
+		        gameAPI.Console_Write("Now listening on port " + cPort);
         }
         catch(Exception e)
         {

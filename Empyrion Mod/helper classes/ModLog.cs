@@ -9,8 +9,8 @@
         {
             Information,
             Warning,
-        Exception
-    }
+            Exception
+        }
         
         public static Exception LastException = null;
   
@@ -59,7 +59,7 @@
 
                 binWriter.Flush();
                 binWriter.Close();
-               stmFile.Close();
+                stmFile.Close();
             }
             catch (Exception ex)
             {

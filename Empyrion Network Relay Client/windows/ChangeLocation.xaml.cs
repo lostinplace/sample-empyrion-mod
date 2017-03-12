@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Empyrion_Mod_Server.windows
+namespace ENRC.windows
 {
     /// <summary>
     /// Interaktionslogik für ChangeLocation.xaml

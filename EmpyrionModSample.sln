@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPM", "Empyrion Mod\EPM.csproj", "{1ABE1F24-8024-4C69-9A8C-DDBA4B80EB36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Empyrion Mod Server", "Empyrion Mod Server\Empyrion Mod Server.csproj", "{E17D9539-31B4-45A8-AC95-ACB621A83069}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = " Empyrion Network Relay Client", "Empyrion Network Relay Client\Empyrion Network Relay Client.csproj", "{E17D9539-31B4-45A8-AC95-ACB621A83069}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

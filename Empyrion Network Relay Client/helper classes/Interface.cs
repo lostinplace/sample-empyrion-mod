@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Empyrion_Mod_Server.data
+namespace ENRC.data
 {
     public class PVector3 : ObservableClass
     {

@@ -6,7 +6,7 @@
     <ProjectGuid>{1ABE1F24-8024-4C69-9A8C-DDBA4B80EB36}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>EPM</RootNamespace>
-    <AssemblyName>EPM</AssemblyName>
+    <AssemblyName>EmpyrionNetworkRelayMod</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>

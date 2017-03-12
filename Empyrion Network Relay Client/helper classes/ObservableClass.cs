@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Empyrion_Mod_Server
+namespace ENRC
 {
     [PropertyChanged.ImplementPropertyChanged()]
     public class ObservableClass : INotifyPropertyChanged

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Threading;
 
-namespace Empyrion_Mod_Server
+namespace ENRC
 {
     /// <summary>
     /// Interaktionslogik für "App.xaml"

@@ -7,8 +7,8 @@
     <ProjectGuid>{E17D9539-31B4-45A8-AC95-ACB621A83069}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Empyrion_Mod_Server</RootNamespace>
-    <AssemblyName>Empyrion Mod Server</AssemblyName>
+    <RootNamespace>ENRC</RootNamespace>
+    <AssemblyName>Empyrion Network Relay Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -121,7 +121,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModServer.cs" />
+    <Compile Include="ModInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,7 +149,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

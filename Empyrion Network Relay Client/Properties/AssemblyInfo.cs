@@ -7,8 +7,8 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("Empyrion Mod Server")]
-[assembly: AssemblyDescription("Empyrion Mod Server")]
+[assembly: AssemblyTitle("Empyrion Network Relay Client")]
+[assembly: AssemblyDescription("Empyrion Network Relay Client")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("W3DG")]
 [assembly: AssemblyProduct("Empyrion Mod Server")]

@@ -1,8 +1,8 @@
-﻿using Empyrion_Mod_Server.data;
+﻿using ENRC.data;
 using System;
 using System.Collections.Generic;
 
-namespace Empyrion_Mod_Server
+namespace ENRC
 {
     public partial class MainWindow
     {

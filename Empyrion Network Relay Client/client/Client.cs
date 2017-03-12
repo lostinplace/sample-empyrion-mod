@@ -8,7 +8,7 @@ using System.Threading;
 using Eleon.Modding;
 
 
-namespace Empyrion_Mod_Server.client
+namespace ENRC.client
 {
     public class Client
     {

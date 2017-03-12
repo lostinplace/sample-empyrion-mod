@@ -2,7 +2,7 @@
 using System.Timers;
 using System.Windows;
 
-namespace Empyrion_Mod_Server
+namespace ENRC
 {
     public partial class MainWindow : Window
     {

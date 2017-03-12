@@ -1,7 +1,7 @@
-﻿<Application x:Class="Empyrion_Mod_Server.App"
+﻿<Application x:Class="ENRC.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Empyrion_Mod_Server"
+             xmlns:local="clr-namespace:ENRC"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

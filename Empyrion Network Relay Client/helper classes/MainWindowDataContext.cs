@@ -1,7 +1,7 @@
-﻿using Empyrion_Mod_Server.data;
+﻿using ENRC.data;
 using System.Collections.ObjectModel;
 
-namespace Empyrion_Mod_Server
+namespace ENRC
 {
     public class MainWindowDataContext
     {

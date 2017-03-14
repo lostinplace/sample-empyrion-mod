@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -136,8 +135,11 @@ public class ModTCPServer {
 
     private void closeTcpListener()
     {
-        if (tcpListener != null) tcpListener.Stop();
-        if (tcpListener.Server != null) { tcpListener.Server.Close(); };
+        if (tcpListener != null)
+        {
+            tcpListener.Stop();
+            if (tcpListener.Server != null) { tcpListener.Server.Close(); };
+        }
         tcpListener = null;
     }
 

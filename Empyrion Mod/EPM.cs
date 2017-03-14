@@ -1,17 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
-using System.Net;
-using System.Net.Sockets;
 using Eleon.Modding;
 
 public class EPM : ModInterface {
-
-    const string cIP = "127.0.0.1";
-    const int cPort = 12345;
-
+    
     ModGameAPI GameAPI;
 
     List<ModProtocol.Package> receivedPackages = new List<ModProtocol.Package>();

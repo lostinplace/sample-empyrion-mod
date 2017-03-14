@@ -1,17 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using UnityEngine;
-using System.Net;
-using System.Net.Sockets;
 using Eleon.Modding;
 
 public class EPM : ModInterface {
-
-    const string cIP = "127.0.0.1";
-    const int cPort = 12345;
-
+    
     ModGameAPI GameAPI;
 
     List<ModProtocol.Package> receivedPackages = new List<ModProtocol.Package>();
@@ -68,10 +60,6 @@ public class EPM : ModInterface {
         for (int i=0; i<temp.Count; i++) {
             tmpPackage = temp[i];
             GameAPI.Console_Write(string.Format("updating game, id: {0}, type: {1}", tmpPackage.cmd, Enum.GetName(cmdType, tmpPackage.cmd)));
-            if(tmpPackage.data != null) {
-                IdMsgPrio tmp = (IdMsgPrio)tmpPackage.data;
-                GameAPI.Console_Write(tmp.msg);
-            }
             GameAPI.Game_Request(tmpPackage.cmd, tmpPackage.seqNr, tmpPackage.data);
         }
         temp.Clear();

@@ -18,7 +18,8 @@ namespace DeathMessagesModule
             GameAPI = dediAPI;
             players = new List<PlayerInfo>();
 
-            GameAPI.Console_Write("DM: Start");
+            GameAPI.Console_Write("Death Messages by joemorin73.");
+            GameAPI.Console_Write("Part of the Empyrion Mod Sample collection.");
 
             var filePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + "Messages.txt";
 
@@ -50,24 +51,17 @@ namespace DeathMessagesModule
                         if (players.Where(e => e.entityId == ((PlayerInfo)data).entityId).Count() == 0)
                         {
                             players.Add((PlayerInfo)data);
-                            GameAPI.Console_Write("DM: Adding player to list " + ((PlayerInfo)data).playerName);
                         }
                         break;
                     case CmdId.Event_Player_Connected:
                         GameAPI.Game_Request(CmdId.Request_Player_Info, (ushort)CmdId.Request_Player_Info, (Id)data);
-                        GameAPI.Console_Write("DM: Connect " + ((Id)data).id.ToString());
                         break;
                     case CmdId.Event_Player_Disconnected:
                         players.Remove(players.FirstOrDefault(e => e.entityId == ((Id)data).id));
-                        GameAPI.Console_Write("DM: Disconnect " + ((Id)data).id.ToString());
                         break;
                     case CmdId.Event_Statistics:
 
                         StatisticsParam stats = (StatisticsParam)data;
-
-                        GameAPI.Console_Write(
-                            String.Format("DM: Stats T - {0} | 1 - {1} | 2 - {2} | 3 - {3}", stats.type.ToString(), stats.int1.ToString(), stats.int2.ToString(), stats.int3.ToString())
-                            );
 
                         if (stats.type == StatisticsType.PlayerDied)
                         {
@@ -102,15 +96,14 @@ namespace DeathMessagesModule
             }
         }
 
+        public void Game_Update()
+        {
+
+        }
+
         public void Game_Exit()
         {
             GameAPI.Console_Write("DM: Exit");
-        }
-
-
-        public void Game_Update()
-        {
-            
         }
     }
 }

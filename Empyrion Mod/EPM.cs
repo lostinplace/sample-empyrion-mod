@@ -60,10 +60,6 @@ public class EPM : ModInterface {
         for (int i=0; i<temp.Count; i++) {
             tmpPackage = temp[i];
             GameAPI.Console_Write(string.Format("updating game, id: {0}, type: {1}", tmpPackage.cmd, Enum.GetName(cmdType, tmpPackage.cmd)));
-            if(tmpPackage.data != null) {
-                IdMsgPrio tmp = (IdMsgPrio)tmpPackage.data;
-                GameAPI.Console_Write(tmp.msg);
-            }
             GameAPI.Game_Request(tmpPackage.cmd, tmpPackage.seqNr, tmpPackage.data);
         }
         temp.Clear();

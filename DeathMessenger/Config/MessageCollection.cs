@@ -23,7 +23,7 @@ namespace DeathMessagesModule.Config
                 {
                     var msgParts = s.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
 
-                    this.Add(new Message(Convert.ToByte(msgParts[0]), msgParts[1]));
+                    this.Add(new Message(Convert.ToInt32(msgParts[0]), msgParts[1]));
                 }
             }
         }

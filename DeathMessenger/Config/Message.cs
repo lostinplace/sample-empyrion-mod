@@ -7,10 +7,10 @@ namespace DeathMessagesModule.Config
 {
     public class Message
     {
-        public Byte MessageType { get; set; }
+        public Int32 MessageType { get; set; }
         public String MessageTemplate { get; set; }
 
-        public Message(Byte messageType, String messageTemplate)
+        public Message(Int32 messageType, String messageTemplate)
         {
             MessageType = messageType;
             MessageTemplate = messageTemplate;

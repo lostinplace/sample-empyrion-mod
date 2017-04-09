@@ -56,19 +56,22 @@
         <Button Margin="2" Grid.Column="0" Grid.Row="6" x:Name="btnGetPlayerInfo" Click="btnGetPlayerInfo_Click" Content="Get Playerinfo"/>
         <Button Margin="2" Grid.Column="0" Grid.Row="7" x:Name="btnSentMessage" Click="btnSentMessage_Click" Content="Sent Message to all"/>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayfields}" IsReadOnly="True">
+        <TextBox Margin="2" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="7" x:Name="txtCommand"/>
+        <Button Margin="2" Grid.Column="9" Grid.Row="0" x:Name="btnSentCommand" Click="btnSentCommand_Click" Content="Sent command"/>
+
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayfields}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Playfields" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayer}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayer}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Player" Binding="{Binding}" Width="*"/>                
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="6" AutoGenerateColumns="False" ItemsSource="{Binding structures}" IsReadOnly="True" x:Name="dgStructures">
+        <DataGrid Margin="2" Grid.Column="3" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="6" AutoGenerateColumns="False" ItemsSource="{Binding structures}" IsReadOnly="True" x:Name="dgStructures">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding type}"/>
@@ -99,7 +102,7 @@
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="4" Grid.RowSpan="4" Grid.ColumnSpan="6" x:Name="dgPlayer"  AutoGenerateColumns="False" ItemsSource="{Binding playerInfos}" IsReadOnly="True" SelectionChanged="dgPlayer_SelectionChanged">
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="5" Grid.RowSpan="4" Grid.ColumnSpan="6" x:Name="dgPlayer"  AutoGenerateColumns="False" ItemsSource="{Binding playerInfos}" IsReadOnly="True" SelectionChanged="dgPlayer_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Client ID" Binding="{Binding clientId}"/>
                 <DataGridTextColumn Header="Steam ID" Binding="{Binding steamId}"/>
@@ -150,7 +153,7 @@
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="7" Grid.Row="4" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgToolbar">
+        <DataGrid Margin="2" Grid.Column="7" Grid.Row="5" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgToolbar">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Slot" Binding="{Binding slotIdx}"/>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
@@ -160,7 +163,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="8" Grid.Row="4" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgBackback">
+        <DataGrid Margin="2" Grid.Column="8" Grid.Row="5" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgBackback">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Slot" Binding="{Binding slotIdx}"/>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
@@ -170,19 +173,19 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="8" Grid.RowSpan="14" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="9" Grid.RowSpan="13" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Output" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="5" Grid.Row="8" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="5" Grid.Row="9" Grid.RowSpan="13" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Events" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="7" Grid.Row="8" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="7" Grid.Row="9" Grid.RowSpan="13" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Statistics" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>

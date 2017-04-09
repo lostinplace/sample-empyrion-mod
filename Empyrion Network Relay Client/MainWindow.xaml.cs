@@ -146,7 +146,7 @@ namespace ENRC
                 }
                 wdInput = null;
             }
-        }       
+        }
 
         private void mnuChangeLocationPlayer_Click(object sender, RoutedEventArgs e)
         {
@@ -156,7 +156,7 @@ namespace ENRC
                 var oldPlayfield = player.playfield;
 
                 windows.ChangeLocation wdChangeLocation = new windows.ChangeLocation { DataContext = player };
-                
+
                 if (wdChangeLocation.ShowDialog() == true)
                 {
                     if (player.playfield != oldPlayfield)
@@ -243,6 +243,15 @@ namespace ENRC
             if (dgPlayer.SelectedItem != null)
             {
                 Blueprint_Finish(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
+
+        private void btnSentCommand_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtCommand.Text != "")
+            {
+                Send_Command(txtCommand.Text);
+                txtCommand.Text = "";
             }
         }
     }

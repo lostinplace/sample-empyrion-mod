@@ -12,7 +12,7 @@ namespace ENRC
         #region  "Send Requests to Game"        
         private void SendRequest(Eleon.Modding.CmdId cmdID, Eleon.Modding.CmdId seqNr, object data)
         {
-            output(string.Format("SendRequest: Command {0} SeqNr: {1}", cmdID, seqNr));    
+            output(string.Format("SendRequest: Command {0} SeqNr: {1}", cmdID, seqNr));
             client.Send(cmdID, (ushort)seqNr, data);
         }
 
@@ -147,6 +147,11 @@ namespace ENRC
         private void Blueprint_Finish(int entityId)
         {
             SendRequest(Eleon.Modding.CmdId.Request_Blueprint_Finish, Eleon.Modding.CmdId.Request_Blueprint_Finish, new Eleon.Modding.Id(entityId));
+        }
+
+        private void Send_Command(string command)
+        {
+            SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
         private void EntitySpawn()
@@ -291,7 +296,17 @@ namespace ENRC
 
                     case Eleon.Modding.CmdId.Event_Error:
                         {
-                            output(string.Format("Event Error seqnr {0}", p.seqNr));
+                            Eleon.Modding.CmdId cmdId = (Eleon.Modding.CmdId)p.seqNr;
+                            Eleon.Modding.ErrorInfo eInfo = (Eleon.Modding.ErrorInfo)p.data;
+
+                            if (eInfo == null)
+                            {
+                                output(string.Format("Event Error seqnr {0}: TMD: p.data of Event_Error was not set", p.seqNr));
+                            }
+                            else
+                            {
+                                output(string.Format("Event Error {0} seqnr {1}", eInfo.errorType, cmdId));
+                            }
                         }
                         break;
 
@@ -411,6 +426,33 @@ namespace ENRC
                             //CoreAdded,      int1: Structure id, int2: destryoing entity id, int3: (optional) controlling entity id
                             //PlayerDied,     int1: player entity id, int2: death type(Unknown = 0, Projectile = 1, Explosion = 2, Food = 3, Oxygen = 4, Disease = 5, Drowning = 6, Fall = 7, Suicide = 8), int3 :  (optional) other entity involved
                             //StructOnOff,    int1: structure id, int2: changing entity id, int3: 0 = off, 1 = on
+                        }
+                        break;
+
+                    case Eleon.Modding.CmdId.Request_ConsoleCommand:
+                        {
+                            Eleon.Modding.PString obj = (Eleon.Modding.PString)p.data;
+                            if (obj == null) { break; }
+
+                            output(string.Format("Request_ConsoleCommand: {0}", obj.pstr));
+                        }
+                        break;
+
+                    case Eleon.Modding.CmdId.Event_ChatMessage:
+                        {
+                            Eleon.Modding.ChatInfo obj = (Eleon.Modding.ChatInfo)p.data;
+                            if (obj == null) { break; }
+
+                            output(string.Format("Chat: Player: {0}, Recepient: {1}, Recepient Faction: {2}, Message: '{3}'", obj.playerId, obj.recipientEntityId, obj.recipientFactionId, obj.msg));
+                        }
+                        break;
+
+                    case Eleon.Modding.CmdId.Event_Player_DisconnectedWaiting:
+                        {
+                            Eleon.Modding.Id obj = (Eleon.Modding.Id)p.data;
+                            if (obj == null) { break; }
+
+                            addEvent(string.Format("Event_Player_DisconnectedWaiting: Player: {0}", obj.id));
                         }
                         break;
 

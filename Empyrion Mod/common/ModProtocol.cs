@@ -255,18 +255,6 @@ public class ModProtocol {
                         case CmdId.Request_Entity_Spawn:
                             obj = Serializer.Deserialize<EntitySpawnInfo>(ms);
                             break;
-                            
-                        case CmdId.Event_Player_DisconnectedWaiting:
-                            obj = Serializer.Deserialize<Id>(ms);
-                            break;
-
-                        case CmdId.Event_ChatMessage:
-                            obj = Serializer.Deserialize<ChatInfo>(ms);
-                            break;
-
-                        case CmdId.Request_ConsoleCommand:
-                            obj = Serializer.Deserialize<PString>(ms);
-                            break;
                     }
                 }
 
@@ -487,18 +475,6 @@ public class ModProtocol {
 
                         case CmdId.Request_Entity_Spawn:
                             ProtoBuf.Serializer.Serialize<Eleon.Modding.EntitySpawnInfo>(ms, (Eleon.Modding.EntitySpawnInfo)p.data);
-                            break;
-                            
-                        case CmdId.Event_Player_DisconnectedWaiting:
-                            Serializer.Serialize(ms, (Id)p.data);
-                            break;
-
-                        case CmdId.Event_ChatMessage:
-                            ProtoBuf.Serializer.Serialize<Eleon.Modding.ChatInfo>(ms, (Eleon.Modding.ChatInfo)p.data);
-                            break;
-
-                        case CmdId.Request_ConsoleCommand:
-                            ProtoBuf.Serializer.Serialize<Eleon.Modding.PString>(ms, (Eleon.Modding.PString)p.data);
                             break;
 
                         default:

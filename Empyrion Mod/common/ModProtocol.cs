@@ -255,6 +255,58 @@ public class ModProtocol {
                         case CmdId.Request_Entity_Spawn:
                             obj = Serializer.Deserialize<EntitySpawnInfo>(ms);
                             break;
+                            
+                        case CmdId.Event_Player_DisconnectedWaiting:
+                            obj = Serializer.Deserialize<Id>(ms);
+                            break;
+
+                        case CmdId.Event_ChatMessage:
+                            obj = Serializer.Deserialize<ChatInfo>(ms);
+                            break;
+
+                        case CmdId.Request_ConsoleCommand:
+                            obj = Serializer.Deserialize<PString>(ms);
+                            break;
+
+                        case CmdId.Request_Structure_BlockStatistics:
+                            obj = Serializer.Deserialize<Id>(ms);
+                            break;
+
+                        case CmdId.Event_Structure_BlockStatistics:
+                            obj = Serializer.Deserialize<IdStructureBlockInfo>(ms);
+                            break;
+
+                        case CmdId.Event_AlliancesAll:
+                            obj = Serializer.Deserialize<AlliancesTable>(ms);
+                            break;
+
+                        case CmdId.Request_AlliancesFaction:
+                            obj = Serializer.Deserialize<AlliancesFaction>(ms);
+                            break;
+
+                        case CmdId.Event_AlliancesFaction:
+                            obj = Serializer.Deserialize<AlliancesFaction>(ms);
+                            break;
+
+                        case CmdId.Event_BannedPlayers:
+                            obj = Serializer.Deserialize<BannedPlayerData>(ms);
+                            break;
+
+                        case Eleon.Modding.CmdId.Request_InGameMessage_Faction:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.IdMsgPrio>(ms);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_TraderNPCItemSold:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.TraderNPCItemSoldInfo>(ms);
+                            break;
+
+                        case Eleon.Modding.CmdId.Request_Player_GetAndRemoveInventory:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.Id>(ms);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_Player_GetAndRemoveInventory:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.Inventory>(ms);
+                            break;
                     }
                 }
 
@@ -475,6 +527,58 @@ public class ModProtocol {
 
                         case CmdId.Request_Entity_Spawn:
                             ProtoBuf.Serializer.Serialize<Eleon.Modding.EntitySpawnInfo>(ms, (Eleon.Modding.EntitySpawnInfo)p.data);
+                            break;
+                            
+                        case CmdId.Event_Player_DisconnectedWaiting:
+                            Serializer.Serialize(ms, (Id)p.data);
+                            break;
+
+                        case CmdId.Event_ChatMessage:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.ChatInfo>(ms, (Eleon.Modding.ChatInfo)p.data);
+                            break;
+
+                        case CmdId.Request_ConsoleCommand:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.PString>(ms, (Eleon.Modding.PString)p.data);
+                            break;
+
+                        case CmdId.Request_Structure_BlockStatistics:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.Id>(ms, (Eleon.Modding.Id)p.data);
+                            break;
+
+                        case CmdId.Event_Structure_BlockStatistics:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.IdStructureBlockInfo>(ms, (Eleon.Modding.IdStructureBlockInfo)p.data);
+                            break;
+
+                        case CmdId.Event_AlliancesAll:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.AlliancesTable>(ms, (Eleon.Modding.AlliancesTable)p.data);
+                            break;
+
+                        case CmdId.Request_AlliancesFaction:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.AlliancesFaction>(ms, (Eleon.Modding.AlliancesFaction)p.data);
+                            break;
+
+                        case CmdId.Event_AlliancesFaction:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.AlliancesFaction>(ms, (Eleon.Modding.AlliancesFaction)p.data);
+                            break;
+
+                        case CmdId.Event_BannedPlayers:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.BannedPlayerData>(ms, (Eleon.Modding.BannedPlayerData)p.data);
+                            break;
+                            
+                        case CmdId.Request_InGameMessage_Faction:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.IdMsgPrio>(ms, (Eleon.Modding.IdMsgPrio)p.data);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_TraderNPCItemSold:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.TraderNPCItemSoldInfo>(ms, (Eleon.Modding.TraderNPCItemSoldInfo)p.data);
+                            break;
+
+                        case Eleon.Modding.CmdId.Request_Player_GetAndRemoveInventory:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.Id>(ms, (Eleon.Modding.Id)p.data);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_Player_GetAndRemoveInventory:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.Inventory>(ms, (Eleon.Modding.Inventory)p.data);
                             break;
 
                         default:

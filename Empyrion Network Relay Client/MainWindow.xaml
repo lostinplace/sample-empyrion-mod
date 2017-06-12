@@ -24,17 +24,18 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -55,20 +56,40 @@
         <Button Margin="2" Grid.Column="0" Grid.Row="5" x:Name="btnGetStructureUpdate" Click="btnGetStructureUpdate_Click" Content="Structureupdate"/>
         <Button Margin="2" Grid.Column="0" Grid.Row="6" x:Name="btnGetPlayerInfo" Click="btnGetPlayerInfo_Click" Content="Get Playerinfo"/>
         <Button Margin="2" Grid.Column="0" Grid.Row="7" x:Name="btnSentMessage" Click="btnSentMessage_Click" Content="Sent Message to all"/>
+        <Button Margin="2" Grid.Column="0" Grid.Row="8" x:Name="btnGetFactions" Click="btnGetFactions_Click" Content="Get Factions"/>
+        <Button Margin="2" Grid.Column="0" Grid.Row="9" x:Name="btnGetAlliances" Click="btnGetAlliances_Click" Content="Get Alliances"/>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayfields}" IsReadOnly="True">
+
+        <Label Margin="2" Grid.Column="0" Grid.Row="12" Content="Enable Output of:" FontWeight="Bold"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="13" Content="SendRequest" IsChecked="{Binding EnableOutput_SendRequest}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="14" Content="Data recieved" IsChecked="{Binding EnableOutput_DataRecieved}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="15" Content="Player List" IsChecked="{Binding EnableOutput_Event_Player_List}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="16" Content="Player Info" IsChecked="{Binding EnableOutput_Event_Player_Info}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="17" Content="Player Inventory" IsChecked="{Binding EnableOutput_Event_Player_Inventory}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="18" Content="Entity PosAndRot" IsChecked="{Binding EnableOutput_Event_Entity_PosAndRot}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="19" Content="Player Credits" IsChecked="{Binding EnableOutput_Event_Player_Credits}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="20" Content="GlobalStructure List" IsChecked="{Binding EnableOutput_Event_GlobalStructure_List}"/>
+        <CheckBox Margin="2" Grid.Column="0" Grid.Row="21" Content="Playfield List" IsChecked="{Binding EnableOutput_Event_Playfield_List}"/>
+        <Button Margin="2" Grid.Column="0" Grid.Row="22" x:Name="btnClearOutput" Click="btnClearOutput_Click" Content="Clear output"/>
+        <Button Margin="2" Grid.Column="0" Grid.Row="23" x:Name="btnReloadPlayfield" Click="btnReloadPlayfield_Click" Content="Reload playfield files"/>
+        <Button Margin="2" Grid.Column="0" Grid.Row="24" x:Name="btnGetBannedPlayers" Click="btnGetBannedPlayers_Click" Content="Get banned players"/>
+
+        <TextBox Margin="6" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="7" x:Name="txtCommand" KeyUp="txtCommand_KeyUp"/>
+        <Button Margin="2" Grid.Column="9" Grid.Row="0" x:Name="btnSentCommand" Click="btnSentCommand_Click" Content="Sent command"/>
+
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayfields}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Playfields" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayer}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayer}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Player" Binding="{Binding}" Width="*"/>                
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="6" AutoGenerateColumns="False" ItemsSource="{Binding structures}" IsReadOnly="True" x:Name="dgStructures">
+        <DataGrid Margin="2" Grid.Column="3" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="6" AutoGenerateColumns="False" ItemsSource="{Binding structures}" IsReadOnly="True" x:Name="dgStructures">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding type}"/>
@@ -95,11 +116,13 @@
                 <ContextMenu>
                     <MenuItem Header="Change location" x:Name="mnuChangeLocationStructure" Click="mnuChangeLocationStructure_Click"/>
                     <MenuItem Header="Destroy" x:Name="mnuDestroyStructure" Click="mnuDestroyStructure_Click"/>
+                    <MenuItem Header="Get BlockStatistics" x:Name="mnuGet_Structure_BlockStatistics" Click="mnuGet_Structure_BlockStatistics_Click"/>
+                    <MenuItem Header="Touch" x:Name="mnuTouch" Click="mnuTouch_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="4" Grid.RowSpan="4" Grid.ColumnSpan="6" x:Name="dgPlayer"  AutoGenerateColumns="False" ItemsSource="{Binding playerInfos}" IsReadOnly="True" SelectionChanged="dgPlayer_SelectionChanged">
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="5" Grid.RowSpan="4" Grid.ColumnSpan="6" x:Name="dgPlayer"  AutoGenerateColumns="False" ItemsSource="{Binding playerInfos}" IsReadOnly="True" SelectionChanged="dgPlayer_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Client ID" Binding="{Binding clientId}"/>
                 <DataGridTextColumn Header="Steam ID" Binding="{Binding steamId}"/>
@@ -146,11 +169,13 @@
                     <MenuItem Header="Sent message" x:Name="mnuPlayerSendMessage" Click="mnuPlayerSendMessage_Click"/>
                     <MenuItem Header="Show Dialog" x:Name="mnuPlayerShowDialog" Click="mnuPlayerShowDialog_Click"/>
                     <MenuItem Header="Finish Blueprint" x:Name="mnuPlayerFinishBP" Click="mnuPlayerFinishBP_Click"/>
+                    <MenuItem Header="Item Exchange" x:Name="mnuItemExchange" Click="mnuItemExchange_Click"/>
+                    <MenuItem Header="Get and remove inventory" x:Name="mnuGetAndRemoveInventory" Click="mnuGetAndRemoveInventory_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="7" Grid.Row="4" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgToolbar">
+        <DataGrid Margin="2" Grid.Column="7" Grid.Row="5" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgToolbar">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Slot" Binding="{Binding slotIdx}"/>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
@@ -160,7 +185,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="8" Grid.Row="4" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgBackback">
+        <DataGrid Margin="2" Grid.Column="8" Grid.Row="5" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" IsReadOnly="True" x:Name="dgBackback">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Slot" Binding="{Binding slotIdx}"/>
                 <DataGridTextColumn Header="Id" Binding="{Binding id}"/>
@@ -170,19 +195,19 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="8" Grid.RowSpan="14" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="9" Grid.RowSpan="14" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Output" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="5" Grid.Row="8" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="5" Grid.Row="9" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Events" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="7" Grid.Row="8" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="7" Grid.Row="9" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Statistics" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>

@@ -52,13 +52,10 @@ namespace ENRC.client
                 Thread.Sleep(1000);
             }
         }
-        Type cmdType = typeof(Eleon.Modding.CmdId);
+        
         // Called in a thread!
         private void PackageReceivedDelegate(ModProtocol con, ModProtocol.Package p)
-        {
-            ClientMessages(string.Format("Package received, id: {0}, type: {1}", p.cmd, Enum.GetName(cmdType, p.cmd)));
-            ClientMessages("received  event: c=" + p.cmd + " sNr=" + p.seqNr + " d=" + p.data + " client=" + client);
-
+        {         
             GameEventReceived(p);
         }
 
@@ -71,7 +68,7 @@ namespace ENRC.client
 
         public void Send(CmdId cmdId, ushort seqNr, object data)
         {
-            ClientMessages("Sending request event: c=" + cmdId + " sNr=" + seqNr + " d=" + data + " client="+client);
+            //ClientMessages("Sending request event: c=" + cmdId + " sNr=" + seqNr + " d=" + data + " client="+client);
             // Send events of the network
             ModProtocol c = client;
             if (c != null)

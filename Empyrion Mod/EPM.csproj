@@ -37,6 +37,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <None Include="common\ModInterface.cs" />
     <Compile Include="common\ModProtocol.cs" />
     <Compile Include="common\ModTCPServer.cs" />
     <Compile Include="common\ModThreadHelper.cs" />

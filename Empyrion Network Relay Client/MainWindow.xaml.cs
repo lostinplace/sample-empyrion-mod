@@ -146,7 +146,7 @@ namespace ENRC
                 }
                 wdInput = null;
             }
-        }       
+        }
 
         private void mnuChangeLocationPlayer_Click(object sender, RoutedEventArgs e)
         {
@@ -156,7 +156,7 @@ namespace ENRC
                 var oldPlayfield = player.playfield;
 
                 windows.ChangeLocation wdChangeLocation = new windows.ChangeLocation { DataContext = player };
-                
+
                 if (wdChangeLocation.ShowDialog() == true)
                 {
                     if (player.playfield != oldPlayfield)
@@ -243,6 +243,88 @@ namespace ENRC
             if (dgPlayer.SelectedItem != null)
             {
                 Blueprint_Finish(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
+
+        private void btnSentCommand_Click(object sender, RoutedEventArgs e)
+        {
+            Send_Command_Text();
+        }
+
+        private void txtCommand_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            switch (e.Key) {
+                case System.Windows.Input.Key.Enter:
+                    Send_Command_Text();
+                        break;
+                }
+        }
+
+        private void Send_Command_Text()
+        {
+            if (txtCommand.Text != "")
+            {
+                Send_Command(txtCommand.Text);
+                txtCommand.Text = "";
+            }
+        }
+
+        private void btnGetAlliances_Click(object sender, RoutedEventArgs e)
+        {
+            Get_Alliances();
+        }
+
+        private void btnGetFactions_Click(object sender, RoutedEventArgs e)
+        {
+            Get_Factions();
+        }
+
+        private void mnuGet_Structure_BlockStatistics_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgStructures.SelectedItem != null)
+            {
+                Get_Structure_BlockStatistics(((data.StructureInfo)dgStructures.SelectedItem).id);
+            }            
+        }
+
+        private void mnuTouch_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgStructures.SelectedItem != null)
+            {
+                Touch_Structure(((data.StructureInfo)dgStructures.SelectedItem).id);
+            }
+        }
+
+        private void btnClearOutput_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindowDataContext.output.Clear();
+            mainWindowDataContext.events.Clear();
+            mainWindowDataContext.stats.Clear();
+        }
+
+        private void btnReloadPlayfield_Click(object sender, RoutedEventArgs e)
+        {
+            Send_Command("playfield");
+        }
+
+        private void btnGetBannedPlayers_Click(object sender, RoutedEventArgs e)
+        {
+            GetBannedPlayers();
+        }
+
+        private void mnuGetAndRemoveInventory_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                GetAndRemoveInventory(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }            
+        }
+
+        private void mnuItemExchange_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                ItemExchange(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
             }
         }
     }

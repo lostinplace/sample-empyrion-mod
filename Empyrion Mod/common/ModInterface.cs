@@ -122,9 +122,16 @@ namespace Eleon.Modding
         Event_Ok,
         Event_Error,                        // ErrorInfo
 
+        // *** New
+
         Event_TraderNPCItemSold,            // TraderNPCItemSoldInfo
         Request_Player_GetAndRemoveInventory,// Id
         Event_Player_GetAndRemoveInventory,  // Inventory
+
+        Request_Playfield_Entity_List,      // PString (playfield)
+        Event_Playfield_Entity_List,        // PlayfieldEntityList
+
+        Request_Entity_Destroy2,            // IdPlayfield (id of entity, playfield the entity is in)
     }
 
     [Obfuscation]
@@ -1012,15 +1019,58 @@ namespace Eleon.Modding
         {
         }
 
-        public TraderNPCItemSoldInfo(int _playerEntityId, int _traderEntityId, string _traderType, int _structEntityId, int _boughtItemId, int _boughtItemCount, int _boughtItemPrice)
+        public TraderNPCItemSoldInfo(int nPlayerEntityId, int nTraderEntityId, string nTraderType, int nStructEntityId, int nBoughtItemId, int nBoughtItemCount, int nBoughtItemPrice)
         {
-            playerEntityId = _playerEntityId;
-            traderEntityId = _traderEntityId;
-            traderType = _traderType;
-            structEntityId = _structEntityId;
-            boughtItemId = _boughtItemId;
-            boughtItemCount = _boughtItemCount;
-            boughtItemPrice = _boughtItemPrice;
+            playerEntityId = nPlayerEntityId;
+            traderEntityId = nTraderEntityId;
+            traderType = nTraderType;
+            structEntityId = nStructEntityId;
+            boughtItemId = nBoughtItemId;
+            boughtItemCount = nBoughtItemCount;
+            boughtItemPrice = nBoughtItemPrice;
+        }
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public class EntityInfo
+    {
+        [ProtoMember(1)]
+        public int id;
+        [ProtoMember(2)]
+        public int type;    // Unknown = 0,Player = 1,BA = 2,CV = 3,SV = 4,HV = 5,AstRes = 6,AstVoxel = 7,EscapePod = 8,Animal = 9,Turret = 10,Item = 11,PlayerDrone = 12,Trader = 13
+        [ProtoMember(3)]
+        public PVector3 pos;
+
+        public EntityInfo()
+        {
+        }
+
+        public EntityInfo(int nId, int nType, PVector3 nPos)
+        {
+            id = nId;
+            type = nType;
+            pos = nPos;
+        }
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public class PlayfieldEntityList
+    {
+        [ProtoMember(1)]
+        public string playfield;
+        [ProtoMember(2)]
+        public List<EntityInfo> entities;
+
+        public PlayfieldEntityList()
+        {
+        }
+
+        public PlayfieldEntityList(string nPlayield, List<EntityInfo> nEntities)
+        {
+            playfield = nPlayield;
+            entities = nEntities;
         }
     }
 }

@@ -99,6 +99,24 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_GlobalStructure_Update, Eleon.Modding.CmdId.Request_GlobalStructure_Update, new Eleon.Modding.PString(Playfield));
         }
 
+        private void GetAllEntities()
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.entities.Clear()));
+
+            lock (playfields)
+            {
+                foreach (string playfield in playfields)
+                {
+                    GetEntities(playfield);
+                }
+            }
+        }
+
+        private void GetEntities(string Playfield)
+        {
+            SendRequest(Eleon.Modding.CmdId.Request_Playfield_Entity_List, Eleon.Modding.CmdId.Request_Playfield_Entity_List, new Eleon.Modding.PString(Playfield));
+        }
+
         private void Get_Factions(int fromId = 1)
         {
             SendRequest(Eleon.Modding.CmdId.Request_Get_Factions, Eleon.Modding.CmdId.Request_Get_Factions, new Eleon.Modding.Id(fromId));
@@ -189,6 +207,11 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy, Eleon.Modding.CmdId.Request_Entity_Destroy, new Eleon.Modding.Id(entity_Id));
         }
 
+        private void Entity_Destroy2(int entity_Id, string playfield)
+        {
+            SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy2, Eleon.Modding.CmdId.Request_Entity_Destroy2, new Eleon.Modding.IdPlayfield(entity_Id,playfield));
+        }
+
         private void GetBannedPlayers()
         {
             SendRequest(Eleon.Modding.CmdId.Request_GetBannedPlayers, Eleon.Modding.CmdId.Request_GetBannedPlayers, null);
@@ -202,7 +225,7 @@ namespace ENRC
         private void ItemExchange(int entity_Id)
         {
             Eleon.Modding.ItemStack[] itStack = new Eleon.Modding.ItemStack[] { new Eleon.Modding.ItemStack(2053, 1) };
-            SendRequest(Eleon.Modding.CmdId.Request_Player_ItemExchange, Eleon.Modding.CmdId.Request_Player_ItemExchange, new Eleon.Modding.ItemExchangeInfo(entity_Id,"Player Item Exchange Title", "Put your description here", "Your button text here", itStack));
+            SendRequest(Eleon.Modding.CmdId.Request_Player_ItemExchange, Eleon.Modding.CmdId.Request_Player_ItemExchange, new Eleon.Modding.ItemExchangeInfo(entity_Id, "Player Item Exchange Title", "Put your description here", "Your button text here", itStack));
         }
         #endregion
 
@@ -443,10 +466,16 @@ namespace ENRC
                             if (obj == null || obj.playfields == null) { break; }
                             output(string.Format("Playfield list. Count: {0}", obj.playfields != null ? obj.playfields.Count : 0), p.cmd);
                             System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.onlinePlayfields.Clear()));
-                            foreach (string s in obj.playfields)
+
+                            lock (playfields)
                             {
-                                System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.onlinePlayfields.Add(s)));
-                                output(string.Format("  {0}", s), p.cmd);
+                                playfields.Clear();
+                                foreach (string s in obj.playfields)
+                                {
+                                    System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.onlinePlayfields.Add(s)));
+                                    output(string.Format("  {0}", s), p.cmd);
+                                    playfields.Add(s);
+                                }
                             }
                         }
                         break;
@@ -578,7 +607,7 @@ namespace ENRC
                         {
                             Eleon.Modding.TraderNPCItemSoldInfo obj = (Eleon.Modding.TraderNPCItemSoldInfo)p.data;
                             if (obj == null) { break; }
-                            output(string.Format("Trader NPC item sold info: TraderType: {0}, TraderId: {1}, PlayerId: {2}, StructureId: {3}, Item: {4}, Amount: {5}, Price: {6}", obj.traderType, obj.traderEntityId, obj.playerEntityId, obj.structEntityId, obj.boughtItemId, obj.boughtItemCount, obj.boughtItemPrice), p.cmd);                            
+                            output(string.Format("Trader NPC item sold info: TraderType: {0}, TraderId: {1}, PlayerId: {2}, StructureId: {3}, Item: {4}, Amount: {5}, Price: {6}", obj.traderType, obj.traderEntityId, obj.playerEntityId, obj.structEntityId, obj.boughtItemId, obj.boughtItemCount, obj.boughtItemPrice), p.cmd);
                         }
                         break;
 
@@ -602,6 +631,30 @@ namespace ENRC
                                 {
                                     output("  " + inv.bag[i].slotIdx + ". " + inv.bag[i].id + " " + inv.bag[i].count + " " + inv.bag[i].ammo, p.cmd);
                                 }
+                            }
+                        }
+                        break;
+
+                    case Eleon.Modding.CmdId.Event_Playfield_Entity_List:
+                        {
+                            Eleon.Modding.PlayfieldEntityList obj = (Eleon.Modding.PlayfieldEntityList)p.data;
+                            if (obj == null || obj.entities == null) { break; }
+                            output(string.Format("Entities. Count: {0}", obj.entities != null ? obj.entities.Count : 0), p.cmd);
+
+                            if (obj.entities != null)
+                            {
+                                output(string.Format("Playfield {0}", obj.playfield), p.cmd);
+
+                                foreach (Eleon.Modding.EntityInfo g in obj.entities)
+                                {
+                                    EntityInfo stI = new EntityInfo();
+                                    stI.FromEntityInfo(g, obj.playfield);
+
+                                    output(string.Format("  id={0} type={1} playfield={2} pos={3}/{4}/{5}", g.id, g.type, obj.playfield, g.pos.x, g.pos.y, g.pos.z), p.cmd);
+
+                                    System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.entities.Add(stI)));
+                                }
+
                             }
                         }
                         break;
@@ -635,6 +688,7 @@ namespace ENRC
                         allowOutput = mainWindowDataContext.EnableOutput_Event_Playfield_List;
                         break;
 
+                    case Eleon.Modding.CmdId.Event_Playfield_Entity_List:
                     case Eleon.Modding.CmdId.Event_GlobalStructure_List:
                         allowOutput = mainWindowDataContext.EnableOutput_Event_GlobalStructure_List;
                         break;

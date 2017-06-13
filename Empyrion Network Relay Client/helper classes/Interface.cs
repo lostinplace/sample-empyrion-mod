@@ -189,4 +189,24 @@ namespace ENRC.data
             powered =structureInfo.powered;
         }
     }
+
+    public class EntityInfo : ObservableClass
+    {
+        public int id { get; set; }
+        public string playfield { get; set; }
+        public int type { get; set; }
+        public PVector3 pos { get; set; }
+
+        public void FromEntityInfo(Eleon.Modding.EntityInfo entityInfo, string _playfield)
+        {
+            id = entityInfo.id;
+            type = entityInfo.type;
+            playfield = _playfield;
+            pos = new PVector3();
+            pos.x = entityInfo.pos.x;
+            pos.y = entityInfo.pos.y;
+            pos.z = entityInfo.pos.z;
+            OnPropertyChanged("pos");        
+        }
+    }
 }

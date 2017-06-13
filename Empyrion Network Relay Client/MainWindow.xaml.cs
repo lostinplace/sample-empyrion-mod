@@ -129,6 +129,11 @@ namespace ENRC
             }
         }
 
+        private void btnGetEntities_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllEntities();
+        }
+
         private void mnuAddCredits_Click(object sender, RoutedEventArgs e)
         {
             if (dgPlayer.SelectedItem != null)
@@ -325,6 +330,14 @@ namespace ENRC
             if (dgPlayer.SelectedItem != null)
             {
                 ItemExchange(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
+
+        private void mnuDestroyEntity_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgEntities.SelectedItem != null)
+            {
+                Entity_Destroy2(((data.EntityInfo)dgEntities.SelectedItem).id, ((data.EntityInfo)dgEntities.SelectedItem).playfield);
             }
         }
     }

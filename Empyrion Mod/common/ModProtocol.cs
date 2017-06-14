@@ -307,6 +307,18 @@ public class ModProtocol {
                         case Eleon.Modding.CmdId.Event_Player_GetAndRemoveInventory:
                             obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.Inventory>(ms);
                             break;
+
+                        case Eleon.Modding.CmdId.Request_Playfield_Entity_List:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.PString>(ms);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_Playfield_Entity_List:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.PlayfieldEntityList>(ms);
+                            break;
+
+                        case Eleon.Modding.CmdId.Request_Entity_Destroy2:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.IdPlayfield>(ms);
+                            break;
                     }
                 }
 
@@ -579,6 +591,18 @@ public class ModProtocol {
 
                         case Eleon.Modding.CmdId.Event_Player_GetAndRemoveInventory:
                             ProtoBuf.Serializer.Serialize<Eleon.Modding.Inventory>(ms, (Eleon.Modding.Inventory)p.data);
+                            break;
+
+                        case Eleon.Modding.CmdId.Request_Playfield_Entity_List:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.PString>(ms, (Eleon.Modding.PString)p.data);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_Playfield_Entity_List:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.PlayfieldEntityList>(ms, (Eleon.Modding.PlayfieldEntityList)p.data);
+                            break;
+
+                        case Eleon.Modding.CmdId.Request_Entity_Destroy2:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.IdPlayfield>(ms, (Eleon.Modding.IdPlayfield)p.data);
                             break;
 
                         default:

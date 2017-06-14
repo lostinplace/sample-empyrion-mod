@@ -12,6 +12,7 @@ namespace ENRC
         public ObservableCollection<PlayerInfo> playerInfos { get; set; }
         public ObservableCollection<string> events{ get; set; }
         public ObservableCollection<string> stats { get; set; }
+        public ObservableCollection<EntityInfo> entities { get; set; }
 
         public bool EnableOutput_SendRequest { get; set; } = true;
         public bool EnableOutput_Event_Player_List { get; set; } = true;
@@ -32,6 +33,7 @@ namespace ENRC
             playerInfos = new ObservableCollection<PlayerInfo>();
             events = new ObservableCollection<string>();
             stats = new ObservableCollection<string>();
+            entities = new ObservableCollection<EntityInfo>();
         }
     }
 }

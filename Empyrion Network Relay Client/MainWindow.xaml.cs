@@ -340,5 +340,13 @@ namespace ENRC
                 Entity_Destroy2(((data.EntityInfo)dgEntities.SelectedItem).id, ((data.EntityInfo)dgEntities.SelectedItem).playfield);
             }
         }
+
+        private void mnuGetExportInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgStructures.SelectedItem != null)
+            {
+                Request_Entity_Export(((data.StructureInfo)dgStructures.SelectedItem).id);
+            }
+        }
     }
 }

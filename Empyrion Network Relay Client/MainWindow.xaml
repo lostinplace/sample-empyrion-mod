@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ENRC"
         mc:Ignorable="d"
-        Title="Empyrion Mod Server" Height="950" Width="1500"
+        Title="Empyrion Mod Server" Height="1000" Width="1500"
         Loaded="Window_Loaded"
         Closing="Window_Closing" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
@@ -35,6 +35,7 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -119,6 +120,7 @@
                     <MenuItem Header="Destroy" x:Name="mnuDestroyStructure" Click="mnuDestroyStructure_Click"/>
                     <MenuItem Header="Get BlockStatistics" x:Name="mnuGet_Structure_BlockStatistics" Click="mnuGet_Structure_BlockStatistics_Click"/>
                     <MenuItem Header="Touch" x:Name="mnuTouch" Click="mnuTouch_Click"/>
+                    <MenuItem Header="Get Export Info" x:Name="mnuGetExportInfo" Click="mnuGetExportInfo_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
@@ -211,19 +213,19 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="9" Grid.RowSpan="14" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="9" Grid.RowSpan="15" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Output" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="4,2,2,2" Grid.Column="5" Grid.Row="9" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
+        <DataGrid Margin="4,2,2,2" Grid.Column="5" Grid.Row="9" Grid.RowSpan="15" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Events" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="4,2,2,2" Grid.Column="7" Grid.Row="9" Grid.RowSpan="14" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
+        <DataGrid Margin="4,2,2,2" Grid.Column="7" Grid.Row="9" Grid.RowSpan="15" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Statistics" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>

@@ -212,6 +212,11 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy2, Eleon.Modding.CmdId.Request_Entity_Destroy2, new Eleon.Modding.IdPlayfield(entity_Id,playfield));
         }
 
+        private void Request_Entity_Export(int entity_Id)
+        {
+          SendRequest(Eleon.Modding.CmdId.Request_Entity_Export, Eleon.Modding.CmdId.Request_Entity_Export, new Eleon.Modding.EntityExportInfo(entity_Id, null, true));
+        }
+
         private void GetBannedPlayers()
         {
             SendRequest(Eleon.Modding.CmdId.Request_GetBannedPlayers, Eleon.Modding.CmdId.Request_GetBannedPlayers, null);

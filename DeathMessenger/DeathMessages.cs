@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 
 namespace DeathMessagesModule
 {
@@ -11,7 +11,7 @@ namespace DeathMessagesModule
     {
         ModGameAPI GameAPI;
         List<PlayerInfo> players;
-        Config.MessageCollection messages;
+        Config.Configuration config;
 
         public void Game_Start(ModGameAPI dediAPI)
         {
@@ -21,24 +21,30 @@ namespace DeathMessagesModule
             GameAPI.Console_Write("Death Messages by joemorin73.");
             GameAPI.Console_Write("Part of the Empyrion Mod Sample collection.");
 
-            var filePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + "Messages.txt";
+            var filePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + "Messages.yaml";
 
-            messages = new Config.MessageCollection(filePath);
+            config = Config.Configuration.GetConfiguration(filePath);
+        }
+
+        private void ChatMessage(String msg)
+        {
+            String command = "SAY '" + msg + "'";
+            GameAPI.Game_Request(CmdId.Request_ConsoleCommand, (ushort)CmdId.Request_InGameMessage_AllPlayers, new Eleon.Modding.PString(command));
         }
 
         private void NormalMessage(String msg)
         {
-            GameAPI.Game_Request(CmdId.Request_InGameMessage_AllPlayers, (ushort)CmdId.Request_InGameMessage_AllPlayers, new IdMsgPrio(0, msg, 2, 10));
+            GameAPI.Game_Request(CmdId.Request_InGameMessage_AllPlayers, (ushort)CmdId.Request_InGameMessage_AllPlayers, new IdMsgPrio(0, msg, 0, 100));
         }
 
         private void AlertMessage(String msg)
         {
-            GameAPI.Game_Request(CmdId.Request_InGameMessage_AllPlayers, (ushort)CmdId.Request_InGameMessage_AllPlayers, new IdMsgPrio(0, msg, 1, 10));
+            GameAPI.Game_Request(CmdId.Request_InGameMessage_AllPlayers, (ushort)CmdId.Request_InGameMessage_AllPlayers, new IdMsgPrio(0, msg, 1, 100));
         }
 
         private void AttentionMessage(String msg)
         {
-            GameAPI.Game_Request(CmdId.Request_InGameMessage_AllPlayers, (ushort)CmdId.Request_InGameMessage_AllPlayers, new IdMsgPrio(0, msg, 0, 10));
+            GameAPI.Game_Request(CmdId.Request_InGameMessage_AllPlayers, (ushort)CmdId.Request_InGameMessage_AllPlayers, new IdMsgPrio(0, msg, 2, 100));
         }
 
         public void Game_Event(CmdId eventId, ushort seqNr, object data)
@@ -76,15 +82,25 @@ namespace DeathMessagesModule
                             else
                                 GameAPI.Game_Request(CmdId.Request_Player_Info, (ushort)CmdId.Request_Player_Info, new Id(stats.int1));
 
-                            msg = String.Format(messages.GetNextMessage(stats.int2), user);
-                            
+                            msg = String.Format(config.Messages.GetNextMessage(stats.int2), user);
+
                             PlayerInfo killer = players.FirstOrDefault(e => e.entityId == stats.int3);
 
                             if (killer != null)
-                                msg += String.Format(messages.GetNextMessage(-1), killer.playerName);
+                                msg += String.Format(config.Messages.GetNextMessage(-1), killer.playerName);
 
                             AlertMessage(msg);
+                            if (config.MessageInChat)
+                                ChatMessage(msg);
+
                         }
+                        break;
+                    case CmdId.Event_ChatMessage:
+                        ChatInfo ci = (ChatInfo)data;
+                        if (ci == null) { break; }
+
+                        if (ci.type != 8 && ci.type != 7 && ci.msg == "!MODS")
+                            ChatMessage("Death Messages by joemorin73.");
                         break;
                     default:
                         break;

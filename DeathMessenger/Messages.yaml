@@ -1,0 +1,114 @@
+﻿MessageInChat: False
+Messages:
+- DeathType: -1
+  Message: "Courtesy of {0}."
+- DeathType: -1
+  Message: "Loved by {0}."
+- DeathType: -1
+  Message: "Not missed by {0}."
+- DeathType: -1
+  Message: "Professionally serviced by {0}."
+- DeathType: -1
+  Message: "Death at the hands of {0}."
+- DeathType: -1
+  Message: "{0} took their life."
+- DeathType: -1
+  Message: "{0} enjoyed their slow exsanguination."
+- DeathType: -1
+  Message: "{0} will not miss them."
+- DeathType: -1
+  Message: "Another point for {0}."
+- DeathType: 0
+  Message: "{0} isn't getting up from that."
+- DeathType: 0
+  Message: "{0} did something really stupid."
+- DeathType: 0
+  Message: "{0} had an unknown syndrome."
+- DeathType: 0
+  Message: "{0} was their time after all."
+- DeathType: 1
+  Message: "{0} bit a bullet."
+- DeathType: 1
+  Message: "{0} ate some lead."
+- DeathType: 1
+  Message: "{0} ate some brass."
+- DeathType: 1
+  Message: "{0}'s lead deficiency was fixed."
+- DeathType: 1
+  Message: "{0} wanted to be like Bruce Lee."
+- DeathType: 1
+  Message: "{0} attempted Matrix style bullet time.  They weren't the one."
+- DeathType: 2
+  Message: "{0} went up with a puff of smoke."
+- DeathType: 2
+  Message: "{0} had an issue with internal combustion."
+- DeathType: 2
+  Message: "{0} went boom."
+- DeathType: 2
+  Message: "{0} didn't hear the countdown."
+- DeathType: 3
+  Message: "{0} took the Atkins diet too far."
+- DeathType: 3
+  Message: "{0} forgot they needed to eat."
+- DeathType: 3
+  Message: "{0} EBT card ran out of funds."
+- DeathType: 3
+  Message: "{0} couldn't eat other players and starved."
+- DeathType: 4
+  Message: "{0} took a deep breath and got nothing."
+- DeathType: 4
+  Message: "{0} forgot helmet was on."
+- DeathType: 4
+  Message: "{0} forgot to wear helmet."
+- DeathType: 4
+  Message: "{0} couldn't hold their breath long enough."
+- DeathType: 4
+  Message: "{0} thought oxygen was not essential to life."
+- DeathType: 5
+  Message: "{0} got a touch of the Ebola."
+- DeathType: 5
+  Message: "{0} surrendered to the HIVs."
+- DeathType: 5
+  Message: "{0} got hugged by Charlie and died from the rash."
+- DeathType: 5
+  Message: "{0} needed to focus on hygiene more."
+- DeathType: 5
+  Message: "{0} ran out of medical supplies."
+- DeathType: 6
+  Message: "{0} tried to drink the lake and failed."
+- DeathType: 6
+  Message: "{0} thought they were a fish.  Now they're fish food."
+- DeathType: 6
+  Message: "{0} batteries died in keyboard and couldn't escape the ocean."
+- DeathType: 6
+  Message: "{0} took the liquid diet to far."
+- DeathType: 6
+  Message: "{0} thought breathing water was healthy."
+- DeathType: 7
+  Message: "{0} thought they could fly, but gravity ended that."
+- DeathType: 7
+  Message: "{0} didn't have Forrest Gump's magic legs."
+- DeathType: 7
+  Message: "{0} has a problem judging distance."
+- DeathType: 7
+  Message: "{0} suffered from skinny leg syndrome."
+- DeathType: 7
+  Message: "{0} has hopped to death."
+- DeathType: 7
+  Message: "{0} tried to make a crater, but became a stain on the ground instead."
+- DeathType: 8
+  Message: "{0} helped darwinism by taking their own life."
+- DeathType: 8
+  Message: "{0} thought /slit was the best option."
+- DeathType: 8
+  Message: "{0} couldn't afford life any longer."
+- DeathType: 8
+  Message: "{0} wanted us to benefit from more oxygen."
+- DeathType: 10
+  Message: "{0} became a tasty dinner for the wildlife."
+- DeathType: 10
+  Message: "{0} got served by some sharp teeth in the jungle."
+- DeathType: 10
+  Message: "{0} thought animals were starving to death."
+- DeathType: 10
+  Message: "{0} thought it was a petting zoo."

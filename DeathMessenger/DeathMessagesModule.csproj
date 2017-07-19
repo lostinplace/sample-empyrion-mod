@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\SVN\EmpyrionMods\dependencies\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="Mif, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dependencies\Mif.dll</HintPath>
@@ -48,15 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\Configuration.cs" />
     <Compile Include="Config\Message.cs" />
     <Compile Include="Config\MessageCollection.cs" />
     <Compile Include="DeathMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Messages.txt">
+    <None Include="Messages.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

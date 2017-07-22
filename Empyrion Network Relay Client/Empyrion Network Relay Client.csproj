@@ -89,6 +89,9 @@
     <Compile Include="windows\ChangeLocation.xaml.cs">
       <DependentUpon>ChangeLocation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\SpawnEntity.xaml.cs">
+      <DependentUpon>SpawnEntity.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\InputMessage.xaml.cs">
       <DependentUpon>InputMessage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
     <Page Include="windows\ChangeLocation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\SpawnEntity.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="windows\InputMessage.xaml">
       <Generator>MSBuild:Compile</Generator>

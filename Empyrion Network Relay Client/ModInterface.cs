@@ -197,9 +197,16 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
-        private void EntitySpawn()
+        private void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield)
         {
-            //SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, New Eleon.Modding.(...))
+            Eleon.Modding.EntitySpawnInfo spawnInfo;
+            spawnInfo = new Eleon.Modding.EntitySpawnInfo();
+            spawnInfo.forceEntityId = ID;
+            spawnInfo.exportedEntityDat = exportFile;
+            spawnInfo.prefabName = prefabName;
+            spawnInfo.playfield = Playfield;
+
+            SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
         }
 
         private void Entity_Destroy(int entity_Id)
@@ -231,6 +238,11 @@ namespace ENRC
         {
             Eleon.Modding.ItemStack[] itStack = new Eleon.Modding.ItemStack[] { new Eleon.Modding.ItemStack(2053, 1) };
             SendRequest(Eleon.Modding.CmdId.Request_Player_ItemExchange, Eleon.Modding.CmdId.Request_Player_ItemExchange, new Eleon.Modding.ItemExchangeInfo(entity_Id, "Player Item Exchange Title", "Put your description here", "Your button text here", itStack));
+        }
+
+        private void Request_NewID()
+        {
+             SendRequest(Eleon.Modding.CmdId.Request_NewEntityId, Eleon.Modding.CmdId.Request_NewEntityId, null);
         }
         #endregion
 
@@ -663,6 +675,12 @@ namespace ENRC
                             }
                         }
                         break;
+
+                    case Eleon.Modding.CmdId.Event_NewEntityId:
+                        {
+                            output(string.Format("New ID: {0}", ((Eleon.Modding.Id)p.data).id), p.cmd);
+                            break;
+                        }
 
                     default:
                         output(string.Format("(1) Unknown package cmd {0}", p.cmd), p.cmd);

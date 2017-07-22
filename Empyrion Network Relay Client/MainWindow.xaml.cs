@@ -348,5 +348,25 @@ namespace ENRC
                 Request_Entity_Export(((data.StructureInfo)dgStructures.SelectedItem).id);
             }
         }
+
+        private void mnuImportStructure_Click(object sender, RoutedEventArgs e)
+        {
+            windows.SpawnEntity wdInput = new windows.SpawnEntity();
+                        wdInput.ShowDialog();
+
+            if (System.IO.File.Exists(wdInput.txtExportFile.Text) == false)
+            {
+                mainWindowDataContext.output.Add("Export file not found");
+                return;
+            }
+
+            EntitySpawn(System.Convert.ToInt32(wdInput.txtID.Text), wdInput.txtPrefabName.Text, wdInput.txtExportFile.Text, wdInput.txtPlayfield.Text);
+            wdInput = null;
+        }
+
+        private void btnGetNewID_Click(object sender, RoutedEventArgs e)
+        {
+            Request_NewID();
+        }
     }
 }

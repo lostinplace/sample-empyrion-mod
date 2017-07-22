@@ -24,6 +24,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="25"/>
@@ -34,7 +35,7 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
@@ -60,9 +61,10 @@
         <Button Margin="2" Grid.Column="0" Grid.Row="8" x:Name="btnGetFactions" Click="btnGetFactions_Click" Content="Get Factions"/>
         <Button Margin="2" Grid.Column="0" Grid.Row="9" x:Name="btnGetAlliances" Click="btnGetAlliances_Click" Content="Get Alliances"/>
         <Button Margin="2" Grid.Column="0" Grid.Row="10" x:Name="btnGetEntities" Click="btnGetEntities_Click" Content="Get Entities"/>
+        <Button Margin="2" Grid.Column="0" Grid.Row="11" x:Name="btnGetNewID" Click="btnGetNewID_Click" Content="Get New ID"/>
 
 
-        <Label Margin="2" Grid.Column="0" Grid.Row="12" Content="Enable Output of:" FontWeight="Bold"/>
+        <Label Margin="2" Grid.Column="0" Grid.Row="12" Content="Enable Output of:" FontWeight="Bold" VerticalContentAlignment="Bottom"/>
         <CheckBox Margin="2" Grid.Column="0" Grid.Row="13" Content="SendRequest" IsChecked="{Binding EnableOutput_SendRequest}"/>
         <CheckBox Margin="2" Grid.Column="0" Grid.Row="14" Content="Data recieved" IsChecked="{Binding EnableOutput_DataRecieved}"/>
         <CheckBox Margin="2" Grid.Column="0" Grid.Row="15" Content="Player List" IsChecked="{Binding EnableOutput_Event_Player_List}"/>
@@ -121,6 +123,7 @@
                     <MenuItem Header="Get BlockStatistics" x:Name="mnuGet_Structure_BlockStatistics" Click="mnuGet_Structure_BlockStatistics_Click"/>
                     <MenuItem Header="Touch" x:Name="mnuTouch" Click="mnuTouch_Click"/>
                     <MenuItem Header="Get Export Info" x:Name="mnuGetExportInfo" Click="mnuGetExportInfo_Click"/>
+                    <MenuItem Header="Import structure folder" x:Name="mnuImportStructure" Click="mnuImportStructure_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
@@ -213,19 +216,19 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="2" Grid.Column="1" Grid.Row="9" Grid.RowSpan="15" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
+        <DataGrid Margin="2" Grid.Column="1" Grid.Row="9" Grid.RowSpan="16" Grid.ColumnSpan="4" AutoGenerateColumns="False" ItemsSource="{Binding output}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Output" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="4,2,2,2" Grid.Column="5" Grid.Row="9" Grid.RowSpan="15" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
+        <DataGrid Margin="4,2,2,2" Grid.Column="5" Grid.Row="9" Grid.RowSpan="16" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding events}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Events" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Margin="4,2,2,2" Grid.Column="7" Grid.Row="9" Grid.RowSpan="15" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
+        <DataGrid Margin="4,2,2,2" Grid.Column="7" Grid.Row="9" Grid.RowSpan="16" Grid.ColumnSpan="2" AutoGenerateColumns="False" ItemsSource="{Binding stats}" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Statistics" Binding="{Binding}" Width="*"/>
             </DataGrid.Columns>

@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ENRC.windows"
         mc:Ignorable="d"
-        Title="InputBox" Height="110" Width="350">
+        Title="InputBox" Height="160" Width="500">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  Margin="6" x:Name="txtInput" KeyUp="txtInput_KeyUp"/>
-        <Button Grid.Column="1" Grid.Row="1" Margin="6" x:Name="btnOk" Click="btnOk_Click">Ok</Button>
+        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" x:Name="labInput"></Label>
+        <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"  Margin="6" x:Name="txtInput" KeyUp="txtInput_KeyUp"/>
+        <Button Grid.Column="1" Grid.Row="2" Margin="6" x:Name="btnOk" Click="btnOk_Click">Ok</Button>
     </Grid>
 </Window>

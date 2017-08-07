@@ -134,6 +134,7 @@ namespace Eleon.Modding
         Request_Entity_Destroy2,            // IdPlayfield (id of entity, playfield the entity is in)
 
         Request_Entity_Export,              // EntityExportInfo
+        Event_ConsoleCommand,               // ConsoleCommandInfo
     }
 
     [Obfuscation]
@@ -160,6 +161,7 @@ namespace Eleon.Modding
         CoreAdded,      // int1: structure id, int2: destryoing entity id, int3: (optional) controlling entity id
         PlayerDied,     // int1: player entity id, int2: death type (Unknown = 0,Projectile = 1,Explosion = 2,Food = 3,Oxygen = 4,Disease = 5,Drowning = 6,Fall = 7,Suicide = 8), int3: (optional) other entity involved, int4: (optional) other entity CV/SV/HV id
         StructOnOff,    // int1: structure id, int2: changing entity id, int3: 0 = off, 1 = on
+        StructDestroyed,// int1: structure id, int2: type (0=wipe, 1=decay)
     }
 
     [Obfuscation]
@@ -1101,6 +1103,26 @@ namespace Eleon.Modding
             id = nId;
             filePath = nFilePath;
             isForceUnload = nIsForceUnload;
+        }
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public class ConsoleCommandInfo
+    {
+        [ProtoMember(1)]
+        public string command;
+        [ProtoMember(2)]
+        public bool allowed;    // set to true if the command was executed, false if it was denied
+
+        public ConsoleCommandInfo()
+        {
+        }
+
+        public ConsoleCommandInfo(string nCommand, bool nAllowed)
+        {
+            command = nCommand;
+            allowed = nAllowed;
         }
     }
 }

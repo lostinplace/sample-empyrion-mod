@@ -517,6 +517,7 @@ namespace ENRC
                             //CoreAdded,      int1: Structure id, int2: destryoing entity id, int3: (optional) controlling entity id
                             //PlayerDied,     // int1: player entity id, int2: death type (Unknown = 0,Projectile = 1,Explosion = 2,Food = 3,Oxygen = 4,Disease = 5,Drowning = 6,Fall = 7,Suicide = 8), int3: (optional) other entity involved, int4: (optional) other entity CV/SV/HV id
                             //StructOnOff,    int1: structure id, int2: changing entity id, int3: 0 = off, 1 = on
+                            //StructDestroyed,// int1: structure id, int2: type (0=wipe, 1=decay)
                         }
                         break;
 
@@ -673,6 +674,14 @@ namespace ENRC
                                 }
 
                             }
+                        }
+                        break;
+
+                    case Eleon.Modding.CmdId.Event_ConsoleCommand:
+                        {
+                            Eleon.Modding.ConsoleCommandInfo obj = (Eleon.Modding.ConsoleCommandInfo)p.data;
+                            if (obj == null) { break; }
+                            output(string.Format("Console command: {0} Allowed: {1}", obj.command, obj.allowed),p.cmd);
                         }
                         break;
 

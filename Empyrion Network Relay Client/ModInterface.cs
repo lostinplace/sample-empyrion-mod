@@ -681,7 +681,7 @@ namespace ENRC
                         {
                             Eleon.Modding.ConsoleCommandInfo obj = (Eleon.Modding.ConsoleCommandInfo)p.data;
                             if (obj == null) { break; }
-                            output(string.Format("Console command: {0} Allowed: {1}", obj.command, obj.allowed),p.cmd);
+                            output(string.Format("Player {0}; Console command: {1} Allowed: {2}",obj.playerEntityId, obj.command, obj.allowed),p.cmd);
                         }
                         break;
 

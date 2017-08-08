@@ -1114,6 +1114,8 @@ namespace Eleon.Modding
         public string command;
         [ProtoMember(2)]
         public bool allowed;    // set to true if the command was executed, false if it was denied
+        playerEntityId
+
 
         public ConsoleCommandInfo()
         {

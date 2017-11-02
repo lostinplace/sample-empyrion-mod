@@ -114,7 +114,8 @@
                 <DataGridTextColumn Header="Rot z" Binding="{Binding rot.z}"/>
                 <DataGridTextColumn Header="Rot y" Binding="{Binding rot.y}"/>
                 <DataGridTextColumn Header="Rot x" Binding="{Binding rot.x}"/>
-                <DataGridTextColumn Header="Last visited" Binding="{Binding lastVisited}" Width="*"/>
+                <DataGridTextColumn Header="Last visited" Binding="{Binding lastVisited}"/>
+                <DataGridTextColumn Header="Docked ships" Binding="{Binding dockedships_Str}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>

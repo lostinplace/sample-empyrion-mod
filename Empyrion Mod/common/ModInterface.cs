@@ -319,7 +319,8 @@ namespace Eleon.Modding
         [ProtoMember(1)]
         public int id;
         [ProtoMember(2)]
-        public byte factionGroup;
+        public byte factionGroup; // Faction = 0, Player = 1, Alien = 2, Predator = 3, Prey = 4, Admin = 5
+
         [ProtoMember(3)]
         public int factionId;
 
@@ -343,7 +344,7 @@ namespace Eleon.Modding
         [ProtoMember(2)]
         public byte type;   // BA = 2, CV = 3, SV = 4, HV = 5, AstVoxel = 7
         [ProtoMember(3)]
-        public byte factionGroup;
+        public byte factionGroup;   // Faction = 0, Player = 1, Alien = 2, Predator = 3, Prey = 4, Admin = 5
         [ProtoMember(4)]
         public int factionId;
         [ProtoMember(5)]
@@ -368,6 +369,8 @@ namespace Eleon.Modding
         public int cntLights;
         [ProtoMember(15)]
         public int classNr;
+        [ProtoMember(16)]
+        public List<int> dockedShips;
     }
 
     [Obfuscation]
@@ -713,6 +716,12 @@ namespace Eleon.Modding
         public int? experiencePoints;
         [ProtoMember(16)]
         public int? upgradePoints;
+        [ProtoMember(17)]
+        public int? origin;
+        [ProtoMember(18)]
+        public byte? factionGroup;
+        [ProtoMember(19)]
+        public int? factionId;
 
         public PlayerInfoSet()
         {
@@ -1045,7 +1054,8 @@ namespace Eleon.Modding
         [ProtoMember(1)]
         public int id;
         [ProtoMember(2)]
-        public int type;    // Unknown = 0,Player = 1,BA = 2,CV = 3,SV = 4,HV = 5,AstRes = 6,AstVoxel = 7,EscapePod = 8,Animal = 9,Turret = 10,Item = 11,PlayerDrone = 12,Trader = 13
+        public int type;    // Unknown = 0,Player = 1,BA = 2,CV = 3,SV = 4,HV = 5,AstRes = 6,AstVoxel = 7,EscapePod = 8,Animal = 9,Turret = 10,Item = 11,PlayerDrone = 12,Trader = 13,UndergroundRes=14,
+                            // EnemyDrone = 15, PlayerBackpack = 16, DropContainer = 17, ExplosiveDevice = 18, PlayerBike = 19, PlayerBikeFolded = 20, Asteroid = 21, Civilian = 22, Cyborg = 23, TroopTransport = 24
         [ProtoMember(3)]
         public PVector3 pos;
 
@@ -1114,17 +1124,18 @@ namespace Eleon.Modding
         public string command;
         [ProtoMember(2)]
         public bool allowed;    // set to true if the command was executed, false if it was denied
-        playerEntityId
-
+        [ProtoMember(3)]
+        public int playerEntityId;
 
         public ConsoleCommandInfo()
         {
         }
 
-        public ConsoleCommandInfo(string nCommand, bool nAllowed)
+        public ConsoleCommandInfo(string nCommand, bool nAllowed, int nPlayerEntityId)
         {
             command = nCommand;
             allowed = nAllowed;
+            playerEntityId = nPlayerEntityId;
         }
     }
 }

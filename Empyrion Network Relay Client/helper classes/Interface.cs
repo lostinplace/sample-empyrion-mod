@@ -160,6 +160,21 @@ namespace ENRC.data
         public int classNr { get; set; }
         public int fuel { get; set; }
         public bool powered { get; set; }
+        public List<int> dockedShips;
+
+        public string dockedships_Str
+        {
+            get
+            {
+                if (dockedShips == null) { return ""; }
+                string tmp = "";
+                foreach (int ship in dockedShips)
+                {
+                    tmp = tmp  + ship + "; ";
+                }
+                return tmp;
+            }
+        }
 
         public void FromStructureInfo(Eleon.Modding.GlobalStructureInfo structureInfo, string _playfield)
         {
@@ -187,6 +202,7 @@ namespace ENRC.data
             classNr = structureInfo.classNr;
            fuel= structureInfo.fuel;
             powered =structureInfo.powered;
+            dockedShips = structureInfo.dockedShips;
         }
     }
 

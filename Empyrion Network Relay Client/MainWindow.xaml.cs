@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using EPMConnector;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 
@@ -8,12 +9,12 @@ namespace ENRC
     {
         private Timer aTimer;
         private int counter;
-        private client.Client client;
+        private Client client;
 
         public MainWindow()
         {
             InitializeComponent();
-            client = new client.Client();
+            client = new Client();
             client.GameEventReceived += onGameEvent;
             client.ClientMessages += output;
         }

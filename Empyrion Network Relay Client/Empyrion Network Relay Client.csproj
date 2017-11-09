@@ -70,19 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\Empyrion Mod\common\ModProtocol.cs">
-      <Link>common\ModProtocol.cs</Link>
-    </Compile>
-    <Compile Include="..\Empyrion Mod\common\ModTCPServer.cs">
-      <Link>common\ModTCPServer.cs</Link>
-    </Compile>
-    <Compile Include="..\Empyrion Mod\common\ModThreadHelper.cs">
-      <Link>common\ModThreadHelper.cs</Link>
-    </Compile>
     <Compile Include="..\Empyrion Mod\helper classes\ModLog.cs">
       <Link>helper classes\ModLog.cs</Link>
     </Compile>
-    <Compile Include="client\Client.cs" />
     <Compile Include="helper classes\Interface.cs" />
     <Compile Include="helper classes\MainWindowDataContext.cs" />
     <Compile Include="helper classes\ObservableClass.cs" />
@@ -154,6 +144,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EPMConnector\EPMConnector.csproj">
+      <Project>{ae40b2d3-69ef-4d5e-b1fb-38eece976811}</Project>
+      <Name>EPMConnector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

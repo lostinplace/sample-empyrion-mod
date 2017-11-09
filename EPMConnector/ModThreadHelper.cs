@@ -63,7 +63,7 @@ public class ModThreadHelper
         {
             Console.WriteLine(string.Format("Thread {0} exception:", threadInfo.name));
             Console.WriteLine(e.GetType() + ": " + e.Message);
-            ModLoging.Log(string.Format("MTH: Thread {0} exception: {1}", threadInfo.name, e.GetType() + ": " + e.Message));
+            EPMConnector.ModLoging.Log(string.Format("MTH: Thread {0} exception: {1}", threadInfo.name, e.GetType() + ": " + e.Message));
 
         }
         finally

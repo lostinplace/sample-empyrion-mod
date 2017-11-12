@@ -368,5 +368,22 @@ namespace ENRC
         {
             Request_NewID();
         }
+
+        private void mnuSetName_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgStructures.SelectedItem != null)
+            {
+                try
+                {
+                    windows.InputBox wdInput = new windows.InputBox();
+                    wdInput.ShowDialog();
+                    Request_Entity_SetName(((data.StructureInfo)dgStructures.SelectedItem).id, wdInput.txtInput.Text);
+                    wdInput = null;
+                }
+                catch
+                {
+                }
+            }
+        }
     }
 }

@@ -209,6 +209,14 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
         }
 
+        private void Request_Entity_SetName(int ID, string Name)
+        {
+            Eleon.Modding.IdPlayfieldName pfName = new Eleon.Modding.IdPlayfieldName();
+            pfName.id = ID;
+            pfName.name = Name; 
+            SendRequest(Eleon.Modding.CmdId.Request_Entity_SetName, Eleon.Modding.CmdId.Request_Entity_SetName, pfName);
+        }
+
         private void Entity_Destroy(int entity_Id)
         {
             SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy, Eleon.Modding.CmdId.Request_Entity_Destroy, new Eleon.Modding.Id(entity_Id));
@@ -468,7 +476,7 @@ namespace ENRC
                                         StructureInfo stI = new StructureInfo();
                                         stI.FromStructureInfo(g, kvp.Key);
 
-                                        output(string.Format("  id={0} name={1} type={2} #blocks={3} #devices={4} playfield={5} pos={6}/{7}/{8}", g.id, g.name, g.type, g.cntBlocks, g.cntDevices, kvp.Key, g.pos.x, g.pos.y, g.pos.z), p.cmd);
+                                        output(string.Format("  id={0} name={1} type={2} #blocks={3} #devices={4} playfield={5} pos={6}/{7}/{8}", g.id, g.name, g.type, g.cntBlocks, g.cntDevices, kvp.Key, g.pos.x, g.pos.y, g.pos.z), p.cmd); 
 
                                         System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.structures.Add(stI)));
                                     }
@@ -690,6 +698,27 @@ namespace ENRC
                             output(string.Format("New ID: {0}", ((Eleon.Modding.Id)p.data).id), p.cmd);
                             break;
                         }
+
+                    case Eleon.Modding.CmdId.Event_PdaStateChange:
+                        {
+                            Eleon.Modding.PdaStateInfo data = (Eleon.Modding.PdaStateInfo)p.data;
+                            addEvent(string.Format("PdaStateChange for {0}. Change: {1}", data.Name, data.StateChange));
+                        }
+                        break;
+
+                    //case Eleon.Modding.CmdId.Event_GameEvent:
+                    //    {
+                    //        Eleon.Modding.GameEventData data = (Eleon.Modding.GameEventData)p.data;
+
+                    //        string inventory = "";
+                    //        for (int i = 0; data.ItemStacks != null && i < data.ItemStacks.Length; i++)
+                    //        {
+                    //            inventory = "  " + data.ItemStacks[i].slotIdx + ". " + data.ItemStacks[i].id + " " + data.ItemStacks[i].count + " " + data.ItemStacks[i].ammo;
+                    //        }
+
+                    //        addEvent(string.Format("Event_GameEvent EventType:{0} Name:{1} Type:{2} Amount:{3} PlayerId:{4} Flag:{5} Inventory:{6}", data.EventType, data.Name, data.Type, data.Amount, data.PlayerId, data.Flag, inventory));
+                    //    }
+                    //    break;
 
                     default:
                         output(string.Format("(1) Unknown package cmd {0}", p.cmd), p.cmd);

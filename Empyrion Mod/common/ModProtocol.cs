@@ -327,6 +327,18 @@ public class ModProtocol {
                         case Eleon.Modding.CmdId.Event_ConsoleCommand:
                             obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.ConsoleCommandInfo>(ms);
                             break;
+
+                        case Eleon.Modding.CmdId.Request_Entity_SetName:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.IdPlayfieldName>(ms);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_PdaStateChange:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.PdaStateInfo>(ms);
+                            break;
+
+                        //case Eleon.Modding.CmdId.Event_GameEvent:
+                        //    obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.GameEventData>(ms);
+                        //    break;
                     }
                 }
 
@@ -620,6 +632,18 @@ public class ModProtocol {
                         case Eleon.Modding.CmdId.Event_ConsoleCommand:
                             ProtoBuf.Serializer.Serialize<Eleon.Modding.ConsoleCommandInfo>(ms, (Eleon.Modding.ConsoleCommandInfo)p.data);
                             break;
+
+                        case Eleon.Modding.CmdId.Request_Entity_SetName:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.IdPlayfieldName>(ms, (Eleon.Modding.IdPlayfieldName)p.data);
+                            break;
+
+                        case Eleon.Modding.CmdId.Event_PdaStateChange:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.PdaStateInfo>(ms, (Eleon.Modding.PdaStateInfo)p.data);
+                            break;
+
+                        //case Eleon.Modding.CmdId.Event_GameEvent:
+                        //    ProtoBuf.Serializer.Serialize<Eleon.Modding.GameEventData>(ms, (Eleon.Modding.GameEventData)p.data);
+                        //    break;
 
                         default:
                             break;

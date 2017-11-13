@@ -336,9 +336,9 @@ public class ModProtocol {
                             obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.PdaStateInfo>(ms);
                             break;
 
-                        //case Eleon.Modding.CmdId.Event_GameEvent:
-                        //    obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.GameEventData>(ms);
-                        //    break;
+                        case Eleon.Modding.CmdId.Event_GameEvent:
+                            obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.GameEventData>(ms);
+                            break;
                     }
                 }
 
@@ -641,9 +641,9 @@ public class ModProtocol {
                             ProtoBuf.Serializer.Serialize<Eleon.Modding.PdaStateInfo>(ms, (Eleon.Modding.PdaStateInfo)p.data);
                             break;
 
-                        //case Eleon.Modding.CmdId.Event_GameEvent:
-                        //    ProtoBuf.Serializer.Serialize<Eleon.Modding.GameEventData>(ms, (Eleon.Modding.GameEventData)p.data);
-                        //    break;
+                        case Eleon.Modding.CmdId.Event_GameEvent:
+                            ProtoBuf.Serializer.Serialize<Eleon.Modding.GameEventData>(ms, (Eleon.Modding.GameEventData)p.data);
+                            break;
 
                         default:
                             break;

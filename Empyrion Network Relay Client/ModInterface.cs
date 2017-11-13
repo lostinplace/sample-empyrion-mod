@@ -706,19 +706,19 @@ namespace ENRC
                         }
                         break;
 
-                    //case Eleon.Modding.CmdId.Event_GameEvent:
-                    //    {
-                    //        Eleon.Modding.GameEventData data = (Eleon.Modding.GameEventData)p.data;
+                    case Eleon.Modding.CmdId.Event_GameEvent:
+                        {
+                            Eleon.Modding.GameEventData data = (Eleon.Modding.GameEventData)p.data;
 
-                    //        string inventory = "";
-                    //        for (int i = 0; data.ItemStacks != null && i < data.ItemStacks.Length; i++)
-                    //        {
-                    //            inventory = "  " + data.ItemStacks[i].slotIdx + ". " + data.ItemStacks[i].id + " " + data.ItemStacks[i].count + " " + data.ItemStacks[i].ammo;
-                    //        }
+                            string inventory = "";
+                            for (int i = 0; data.ItemStacks != null && i < data.ItemStacks.Length; i++)
+                            {
+                                inventory = inventory + ";  " + data.ItemStacks[i].slotIdx + ". " + data.ItemStacks[i].id + " " + data.ItemStacks[i].count + " " + data.ItemStacks[i].ammo;
+                            }
 
-                    //        addEvent(string.Format("Event_GameEvent EventType:{0} Name:{1} Type:{2} Amount:{3} PlayerId:{4} Flag:{5} Inventory:{6}", data.EventType, data.Name, data.Type, data.Amount, data.PlayerId, data.Flag, inventory));
-                    //    }
-                    //    break;
+                            addEvent(string.Format("Event_GameEvent EventType:{0} Name:{1} Type:{2} Amount:{3} PlayerId:{4} Flag:{5} Inventory:{6}", data.EventType, data.Name, data.Type, data.Amount, data.PlayerId, data.Flag, inventory));
+                        }
+                        break;
 
                     default:
                         output(string.Format("(1) Unknown package cmd {0}", p.cmd), p.cmd);

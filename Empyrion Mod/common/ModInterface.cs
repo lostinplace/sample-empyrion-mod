@@ -135,6 +135,11 @@ namespace Eleon.Modding
 
         Request_Entity_Export,              // EntityExportInfo
         Event_ConsoleCommand,               // ConsoleCommandInfo
+
+        Request_Entity_SetName,				// IdPlayfieldName (if playfield == null we try to find the corresponding playfield, playfield must be loaded)
+
+        Event_PdaStateChange,               // reported e.g. when a PDA chapter has been activated, param: PdaStateInfo 
+        Event_GameEvent,                    // 
     }
 
     [Obfuscation]
@@ -162,6 +167,15 @@ namespace Eleon.Modding
         PlayerDied,     // int1: player entity id, int2: death type (Unknown = 0,Projectile = 1,Explosion = 2,Food = 3,Oxygen = 4,Disease = 5,Drowning = 6,Fall = 7,Suicide = 8), int3: (optional) other entity involved, int4: (optional) other entity CV/SV/HV id
         StructOnOff,    // int1: structure id, int2: changing entity id, int3: 0 = off, 1 = on
         StructDestroyed,// int1: structure id, int2: type (0=wipe, 1=decay)
+    }
+
+    [Obfuscation]
+    public enum PdaStateChange
+    {
+        Undefined,
+        ChapterActivated,
+        ChapterDeactivated,
+        ChapterCompleted        // includes 'deactivated' since as soon as a chapter has been completed it is automatically deactivated
     }
 
     [Obfuscation]
@@ -371,6 +385,10 @@ namespace Eleon.Modding
         public int classNr;
         [ProtoMember(16)]
         public List<int> dockedShips;
+        [ProtoMember(17)]
+        public byte coreType;  // 0 = no, 1 = the core of the player, 2 = admin core, 3 = alien core, 4 = admin alien core
+        [ProtoMember(18)]
+        public int pilotId;
     }
 
     [Obfuscation]
@@ -402,6 +420,29 @@ namespace Eleon.Modding
         {
             id = nId;
             playfield = nPlayfield;
+        }
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public class IdPlayfieldName
+    {
+        [ProtoMember(1)]
+        public int id;
+        [ProtoMember(2)]
+        public string playfield;
+        [ProtoMember(3)]
+        public string name;
+
+        public IdPlayfieldName()
+        {
+        }
+
+        public IdPlayfieldName(int nId, string nPlayfield, string nName)
+        {
+            id = nId;
+            playfield = nPlayfield;
+            name = nName;
         }
     }
 
@@ -661,6 +702,7 @@ namespace Eleon.Modding
         PlayfieldAlreadyLoaded,
         CommandNotImplemented,
         IOError,
+        EntityNotLocalToPlayfield,
     }
 
     [Obfuscation]
@@ -1137,5 +1179,35 @@ namespace Eleon.Modding
             allowed = nAllowed;
             playerEntityId = nPlayerEntityId;
         }
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public struct PdaStateInfo
+    {
+        [ProtoMember(1)]
+        public string Name;
+        [ProtoMember(2)]
+        public PdaStateChange StateChange;
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public struct GameEventData
+    {
+        [ProtoMember(1)]
+        public byte EventType; // use project's enum when processing this
+        [ProtoMember(2)]
+        public string Name;
+        [ProtoMember(3)]
+        public int Type;
+        [ProtoMember(4)]
+        public int Amount;
+        [ProtoMember(5)]
+        public int PlayerId;
+        [ProtoMember(6)]
+        public bool Flag;
+        [ProtoMember(7)]
+        public ItemStack[] ItemStacks;
     }
 }

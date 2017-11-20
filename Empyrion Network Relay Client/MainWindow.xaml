@@ -115,7 +115,9 @@
                 <DataGridTextColumn Header="Rot y" Binding="{Binding rot.y}"/>
                 <DataGridTextColumn Header="Rot x" Binding="{Binding rot.x}"/>
                 <DataGridTextColumn Header="Last visited" Binding="{Binding lastVisited}"/>
-                <DataGridTextColumn Header="Docked ships" Binding="{Binding dockedships_Str}" Width="*"/>
+                <DataGridTextColumn Header="Docked ships" Binding="{Binding dockedships_Str}"/>
+                <DataGridTextColumn Header="Coretype" Binding="{Binding coreType}"/>
+                <DataGridTextColumn Header="PilotId" Binding="{Binding pilotId}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -125,6 +127,7 @@
                     <MenuItem Header="Touch" x:Name="mnuTouch" Click="mnuTouch_Click"/>
                     <MenuItem Header="Get Export Info" x:Name="mnuGetExportInfo" Click="mnuGetExportInfo_Click"/>
                     <MenuItem Header="Import structure folder" x:Name="mnuImportStructure" Click="mnuImportStructure_Click"/>
+                    <MenuItem Header="Set name" x:Name="mnuSetName" Click="mnuSetName_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

@@ -161,6 +161,8 @@ namespace ENRC.data
         public int fuel { get; set; }
         public bool powered { get; set; }
         public List<int> dockedShips;
+        public int coreType { get; set; } // 0 = no, 1 = the core of the player, 2 = admin core, 3 = alien core, 4 = admin alien core
+        public int pilotId { get; set; }
 
         public string dockedships_Str
         {
@@ -203,6 +205,8 @@ namespace ENRC.data
            fuel= structureInfo.fuel;
             powered =structureInfo.powered;
             dockedShips = structureInfo.dockedShips;
+            coreType = structureInfo.coreType;
+            pilotId = structureInfo.pilotId;
         }
     }
 

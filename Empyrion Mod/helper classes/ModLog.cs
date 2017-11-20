@@ -61,7 +61,7 @@
                 binWriter.Close();
                 stmFile.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

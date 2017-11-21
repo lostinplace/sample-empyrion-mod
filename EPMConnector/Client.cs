@@ -10,6 +10,7 @@ namespace EPMConnector
     {
         ModThreadHelper.Info connectToServerThread;
 
+        public event Action OnConnected;
         public event Action<String> ClientMessages;
         public event Action<ModProtocol.Package> GameEventReceived;
 
@@ -41,6 +42,8 @@ namespace EPMConnector
                         TcpClient tcpClient = new TcpClient(this.gameServerIp, this.gameServerPort);
                         client = new ModProtocol(tcpClient, PackageReceivedDelegate, DisconnectedDelegate);
                         ClientMessages("ModInterface: Connected with " + client);
+
+                        OnConnected?.Invoke();
                     }
                     catch (SocketException)
                     {

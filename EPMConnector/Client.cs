@@ -16,11 +16,14 @@ namespace EPMConnector
 
         volatile ModProtocol client;
 
+        int clientId;
+
         string gameServerIp;
         int gameServerPort;
 
-        public Client()
+        public Client(int clientId)
         {
+            this.clientId = clientId;
         }
 
         public void Connect(string ipAddress, int port)
@@ -79,7 +82,7 @@ namespace EPMConnector
             ModProtocol c = client;
             if (c != null)
             {
-                ModProtocol.Package p = new ModProtocol.Package(cmdId, 0, seqNr, data);
+                ModProtocol.Package p = new ModProtocol.Package(cmdId, clientId, seqNr, data);
                 c.AddToSendQueue(p);
             }
         }

@@ -79,9 +79,11 @@ public partial class DebugMod
             playfield = "Akua",
             pos = new PVector3(11.5354891F, 58.5829468F, -11.8831434F),
             rot = new PVector3(0F, 139.371F, 0F),
-            name = prefabName.pstr,
+            name = "BA_Alien",
             type = 2,
-            prefabName = prefabName.pstr
+            factionGroup =2,
+            factionId = 0,
+            prefabName = "Infested-Test"
         };
         var cmd = new APICmd(CmdId.Request_Entity_Spawn, info);
         broker.HandleCall(cmd);

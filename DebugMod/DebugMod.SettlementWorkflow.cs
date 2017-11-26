@@ -16,8 +16,10 @@ enum SettlementStage
     RequestedDemolition = 4,
     DestroyedOriginal = 5,
     EmplacedNewSettlement = 6,
-    SettlementComplete = 7,
-    SettlementInvalidated = 8
+    ConfirmNewSettlement = 7,
+    SettlementComplete = 8,
+
+    SettlementInvalidated = 9
 }
 
 struct SettlementOperation
@@ -64,7 +66,8 @@ public partial class DebugMod
 
         var operationPayload = Serializer.Serialize(operation);
 
-        var message = $"*** processing operation {operation.seqNr}\n *** cmdid:{eventType} \n *** payload: {operationPayload}";
+        var message = $"*** processing operation {operation.seqNr}\n *** cmdid:{eventType} \n *** " +
+            $"last operation: {operation.stage} \n***  payload: {operationPayload}";
         GameAPI.Console_Write(message);
 
 
@@ -83,18 +86,22 @@ public partial class DebugMod
                 break;
             case CmdId.Event_NewEntityId:
                 var newId = (Id)data;
+
+                GameAPI.Console_Write($"*** new id: {Serializer.Serialize(newId)} ***");
+
                 operation.newStructureId = newId;
                 EntitySpawnInfo newInfo = new EntitySpawnInfo()
                 {
+                    forceEntityId = newId.id,
                     playfield = operation.playfieldName,
                     pos = operation.originalStructureInfo.pos,
                     rot = operation.originalStructureInfo.rot,
                     name = operation.newStructureName,
-                    prefabName = operation.newStructureName,
+                    prefabName = "Test-Bed (Settled)",
                     type = operation.originalStructureInfo.type,
                 };
 
-
+                GameAPI.Console_Write($"*** requesting spawn: {Serializer.Serialize(newInfo)} ***");
                 operation.newStructureInfo = newInfo;
                 operation.stage = SettlementStage.ProvisionedReplacement;
                 operation.stage = SettlementStage.RequestedDemolition;
@@ -118,9 +125,13 @@ public partial class DebugMod
                     settlementOperations[operation.seqNr] = operation;
                     deprovisionOperation(operation.seqNr);
                     GameAPI.Console_Write("*** settlement complete!!! ***");
+
                 }
                 break;
             case CmdId.Event_Error:
+                var error = (ErrorInfo)data;
+                GameAPI.Console_Write($"*** error: {Serializer.Serialize(error)} ***");
+
                 deprovisionOperation(operation.seqNr);
                 break;
         }

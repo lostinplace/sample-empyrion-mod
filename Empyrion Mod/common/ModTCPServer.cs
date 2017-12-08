@@ -8,13 +8,12 @@ using EPMConnector;
 
 public class ModTCPServer {
 
-	const string cIP = "127.0.0.1";
-	const int cPort = 12345;
 
-	TcpListener tcpListener;
-	ModThreadHelper.Info listenThread;
 
-	List<ModProtocol> clients = new List<ModProtocol>();
+    TcpListener tcpListener;
+    ModThreadHelper.Info listenThread;
+
+    List<ModProtocol> clients = new List<ModProtocol>();
 
     ModProtocol.DelegatePackageReceived packageReceivedDelegate;
     ModGameAPI gameAPI;
@@ -23,19 +22,19 @@ public class ModTCPServer {
         gameAPI = api;
     }
 
-	public void StartListen(ModProtocol.DelegatePackageReceived nPackageReceivedDelegate) {
+    public void StartListen(string ip, int port, ModProtocol.DelegatePackageReceived nPackageReceivedDelegate) {
         try
         {
             packageReceivedDelegate = nPackageReceivedDelegate;
-            tcpListener = new TcpListener(IPAddress.Parse(cIP), cPort);
+            tcpListener = new TcpListener(IPAddress.Parse(ip), port);
             listenThread = ModThreadHelper.StartThread(ListenForConnections, System.Threading.ThreadPriority.Lowest);
-		        gameAPI.Console_Write("Now listening on port " + cPort);
+            gameAPI.Console_Write("Now listening on port " + port);
         }
         catch(Exception e)
         {
             ModLoging.Log_Exception(e, "MTP: StartListen");
         }
-	}
+    }
 
     public int GetClientCount() {
         lock (clients) {
@@ -53,7 +52,7 @@ public class ModTCPServer {
         }
     }
 
-	public void Close() {
+    public void Close() {
 
         try
         {
@@ -82,9 +81,9 @@ public class ModTCPServer {
         {
             ModLoging.Log_Exception(e, "MTP: Close");
         }
-	}
+    }
 
-	private void ListenForConnections(ModThreadHelper.Info ti) {
+    private void ListenForConnections(ModThreadHelper.Info ti) {
 
         try
         {
@@ -132,7 +131,7 @@ public class ModTCPServer {
         {
             ModLoging.Log_Exception(e, "MTP: ListenForConnections Outer");
         }
-	}
+    }
 
     private void closeTcpListener()
     {
@@ -144,8 +143,8 @@ public class ModTCPServer {
         tcpListener = null;
     }
 
-	// Called from thread!
-	private void disconnectedDelegate(ModProtocol con) {
+    // Called from thread!
+    private void disconnectedDelegate(ModProtocol con) {
 
         // Remove from list
         if (clients != null)
@@ -154,8 +153,8 @@ public class ModTCPServer {
                 clients.Remove(con);
             }
         }
-		// tbd
-	}
+        // tbd
+    }
  }
 
 

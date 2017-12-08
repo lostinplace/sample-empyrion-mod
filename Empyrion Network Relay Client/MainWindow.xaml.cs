@@ -14,7 +14,7 @@ namespace ENRC
         public MainWindow()
         {
             InitializeComponent();
-            client = new Client();
+            client = new Client(1234);
             client.GameEventReceived += onGameEvent;
             client.ClientMessages += output;
         }

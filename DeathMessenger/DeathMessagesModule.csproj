@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\SVN\EmpyrionMods\dependencies\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>dependencies\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Mif, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -21,6 +21,9 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\DeathMessenger\dependencies\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="Mif, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dependencies\Mif.dll</HintPath>
@@ -38,18 +41,25 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="common\ModInterface.cs" />
+    <Compile Include="..\EPMConnector\ModLog.cs">
+      <Link>common\ModLog.cs</Link>
+    </Compile>
+    <Compile Include="..\EPMConnector\ModProtocol.cs">
+      <Link>common\ModProtocol.cs</Link>
+    </Compile>
+    <Compile Include="..\EPMConnector\ModThreadHelper.cs">
+      <Link>common\ModThreadHelper.cs</Link>
+    </Compile>
     <Compile Include="common\ModTCPServer.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EPM.cs" />
     <Compile Include="helper classes\ModLog.cs" />
+    <None Include="Settings.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="UnityEngine.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\EPMConnector\EPMConnector.csproj">
-      <Project>{ae40b2d3-69ef-4d5e-b1fb-38eece976811}</Project>
-      <Name>EPMConnector</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

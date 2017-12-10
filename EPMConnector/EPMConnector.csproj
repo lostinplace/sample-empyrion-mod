@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{38D13EF0-A11E-4F94-8139-D0680C590C34}</ProjectGuid>
+    <ProjectGuid>{AE40B2D3-69EF-4D5E-B1FB-38EECE976811}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeathMessagesModule</RootNamespace>
-    <AssemblyName>DeathMessagesModule</AssemblyName>
+    <RootNamespace>EPMConnector</RootNamespace>
+    <AssemblyName>EPMConnector</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,18 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>dependencies\Assembly-CSharp-firstpass.dll</HintPath>
+    <Reference Include="Mif">
+      <HintPath>..\Empyrion Mod\dependencies\Mif.dll</HintPath>
     </Reference>
-    <Reference Include="Mif, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dependencies\Mif.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dependencies\protobuf-net.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="protobuf-net">
+      <HintPath>..\Empyrion Mod\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,16 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\Configuration.cs" />
-    <Compile Include="Config\Message.cs" />
-    <Compile Include="Config\MessageCollection.cs" />
-    <Compile Include="DeathMessages.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="ModLog.cs" />
+    <Compile Include="ModProtocol.cs" />
+    <Compile Include="ModThreadHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Messages.yaml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

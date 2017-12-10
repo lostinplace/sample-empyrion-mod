@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Eleon.Modding;
+using EPMConnector;
 
 public class EPM : ModInterface {
     
     ModGameAPI GameAPI;
+
+    Configuration config;
 
     List<ModProtocol.Package> receivedPackages = new List<ModProtocol.Package>();
     List<ModProtocol.Package> receivedPackagesTemp = new List<ModProtocol.Package>();
@@ -19,8 +22,12 @@ public class EPM : ModInterface {
 
     private void startModServer(ModGameAPI gameAPI)
     {
+        var filePath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\" + "Settings.yaml";
+
+        config = Configuration.GetConfiguration(filePath);
+
         server = new ModTCPServer(gameAPI);
-        server.StartListen(PackageReceivedDelegate);
+        server.StartListen(config.GameServerIp, config.GameServerApiPort, PackageReceivedDelegate);
     }
 
     public void Game_Start(ModGameAPI gameAPI) {

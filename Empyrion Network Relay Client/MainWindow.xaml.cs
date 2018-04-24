@@ -387,5 +387,21 @@ namespace ENRC
                 }
             }
         }
+
+        private void mnuAddItems_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                AddItems(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }      
+        }
+
+        private void mnuReplaceInventory_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                ReplaceInventory(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
     }
 }

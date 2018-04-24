@@ -243,6 +243,31 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_Player_GetAndRemoveInventory, Eleon.Modding.CmdId.Request_Player_GetAndRemoveInventory, new Eleon.Modding.Id(entity_Id));
         }
 
+        private void AddItems(int entity_Id)
+        {
+            SendRequest(Eleon.Modding.CmdId.Request_Player_AddItem, Eleon.Modding.CmdId.Request_Player_AddItem, new Eleon.Modding.ItemStack(558, 200)); // Add 200 cores
+        }
+
+        private void ReplaceInventory(int entity_Id)
+        {
+            Eleon.Modding.ItemStack[] Toolbelt = new Eleon.Modding.ItemStack[10];
+            Eleon.Modding.ItemStack[] Backpack = new Eleon.Modding.ItemStack[40];
+
+            for (int i = 0; i <= 9;i++)
+            {
+                Toolbelt[i].id = 558;
+                Toolbelt[i].count = i + 1;
+            }
+
+            for (int i = 0; i <= 39; i++)
+            {
+                Backpack[i].id = 558;
+                Backpack[i].count = i + 1;
+            }
+
+            SendRequest(Eleon.Modding.CmdId.Request_Player_SetInventory, Eleon.Modding.CmdId.Request_Player_SetInventory, new Eleon.Modding.Inventory(entity_Id, Toolbelt, Backpack)); 
+        }
+
         private void ItemExchange(int entity_Id)
         {
             Eleon.Modding.ItemStack[] itStack = new Eleon.Modding.ItemStack[] { new Eleon.Modding.ItemStack(2053, 1) };

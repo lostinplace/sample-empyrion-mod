@@ -196,6 +196,8 @@
                     <MenuItem Header="Finish Blueprint" x:Name="mnuPlayerFinishBP" Click="mnuPlayerFinishBP_Click"/>
                     <MenuItem Header="Item Exchange" x:Name="mnuItemExchange" Click="mnuItemExchange_Click"/>
                     <MenuItem Header="Get and remove inventory" x:Name="mnuGetAndRemoveInventory" Click="mnuGetAndRemoveInventory_Click"/>
+                    <MenuItem Header="Add a few items" x:Name="mnuAddItems" Click="mnuAddItems_Click"/>
+                    <MenuItem Header="Replace inventory" x:Name="mnuReplaceInventory" Click="mnuReplaceInventory_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

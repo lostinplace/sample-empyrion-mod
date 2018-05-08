@@ -313,6 +313,14 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo);
         }
 
+        private void RequestLastLogs(int entity_Id)
+        {
+            Eleon.Modding.PlayerInfoSet pInfo = new Eleon.Modding.PlayerInfoSet();
+            pInfo.entityId = entity_Id;
+            pInfo.sendLastNLogs = 3;            
+            SendRequest(Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo);
+        }
+
         private void ItemExchange(int entity_Id)
         {
             Eleon.Modding.ItemStack[] itStack = new Eleon.Modding.ItemStack[] { new Eleon.Modding.ItemStack(2053, 1) };

@@ -411,5 +411,13 @@ namespace ENRC
                 SetRandomStats(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
             }
         }
+
+        private void mnuRequestLastLogs_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                RequestLastLogs(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
     }
 }

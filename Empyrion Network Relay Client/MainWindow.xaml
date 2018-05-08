@@ -199,6 +199,7 @@
                     <MenuItem Header="Add a few items" x:Name="mnuAddItems" Click="mnuAddItems_Click"/>
                     <MenuItem Header="Replace inventory" x:Name="mnuReplaceInventory" Click="mnuReplaceInventory_Click"/>
                     <MenuItem Header="Set random stats" x:Name="mnuSetRandomStats" Click="mnuSetRandomStats_Click"/>
+                    <MenuItem Header="Request 3 last client logs" x:Name="mnuRequestLastLogs" Click="mnuRequestLastLogs_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

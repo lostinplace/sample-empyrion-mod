@@ -193,14 +193,16 @@ namespace Eleon.Modding
         [ProtoMember(5)]
         public string name;
         [ProtoMember(6)]
-        public byte type;   // BA = 2, CV = 3, SV = 4, HV = 5, AstVoxel = 7
+        public byte type;               // set either this: Undef = 0, BA = 2, CV = 3, SV = 4, HV = 5, AstVoxel = 7
         [ProtoMember(7)]
-        public string prefabName;
+        public string entityTypeName;   // ... or set this to f.e. 'ZiraxMale', 'AlienCivilian1Fat', etc
         [ProtoMember(8)]
-        public byte factionGroup;
+        public string prefabName;
         [ProtoMember(9)]
-        public int factionId;
+        public byte factionGroup;
         [ProtoMember(10)]
+        public int factionId;
+        [ProtoMember(11)]
         public string exportedEntityDat;    // optional: file path of an exported entity dat file. 
                                             // remark: the values above will override the imported data from the .dat file, but you can null/0 these to avoid this.
         public EntitySpawnInfo()
@@ -386,7 +388,7 @@ namespace Eleon.Modding
         [ProtoMember(16)]
         public List<int> dockedShips;
         [ProtoMember(17)]
-        public byte coreType;  // 0 = no, 1 = the core of the player, 2 = admin core, 3 = alien core, 4 = admin alien core
+        public sbyte coreType;  // -1 - data not valid yet, 0 = no, 1 = the core of the player, 2 = admin core, 3 = alien core, 4 = admin alien core
         [ProtoMember(18)]
         public int pilotId;
     }
@@ -764,6 +766,12 @@ namespace Eleon.Modding
         public byte? factionGroup;
         [ProtoMember(19)]
         public int? factionId;
+        [ProtoMember(20)]
+        public byte? factionRole;  // Founder = 0, Admin = 1, Member = 2, NotSet = 3
+        [ProtoMember(21)]
+        public byte? sendLastNLogs;
+        [ProtoMember(22)]
+        public float? bpRemainingTime;
 
         public PlayerInfoSet()
         {

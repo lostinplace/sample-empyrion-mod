@@ -268,6 +268,51 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_Player_SetInventory, Eleon.Modding.CmdId.Request_Player_SetInventory, new Eleon.Modding.Inventory(entity_Id, Toolbelt, Backpack)); 
         }
 
+        private void SetRandomStats(int entity_Id)
+        {
+            Random ran = new Random();
+
+            Eleon.Modding.PlayerInfoSet pInfo = new Eleon.Modding.PlayerInfoSet();
+            pInfo.entityId = entity_Id;
+
+            switch (ran.Next(1, 8))
+            {
+                case 1:
+                    pInfo.health = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed health to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.health), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 2:
+                    pInfo.healthMax = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed healthMax to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.healthMax), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 3:
+                    pInfo.experiencePoints = ran.Next(10000, 250000);
+                    output(string.Format("SendRequest: Command {0} Changed experiencePoints to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.experiencePoints), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 4:
+                    pInfo.upgradePoints = ran.Next(100, 1000);
+                    output(string.Format("SendRequest: Command {0} Changed upgradePoints to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.upgradePoints), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 5:
+                    pInfo.stamina = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed stamina to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.stamina), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 6:
+                    pInfo.staminaMax = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed staminaMax to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.staminaMax), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 7:
+                    pInfo.food = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed stamina to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.food), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 8:
+                    pInfo.foodMax = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed staminaMax to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.foodMax), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+            }
+            SendRequest(Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo);
+        }
+
         private void ItemExchange(int entity_Id)
         {
             Eleon.Modding.ItemStack[] itStack = new Eleon.Modding.ItemStack[] { new Eleon.Modding.ItemStack(2053, 1) };

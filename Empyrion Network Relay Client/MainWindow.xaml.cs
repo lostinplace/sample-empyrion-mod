@@ -17,7 +17,7 @@ namespace ENRC
             client = new Client(1234);
             client.GameEventReceived += onGameEvent;
             client.ClientMessages += output;
-            client.Connect("127.0.0.1", 32345);
+            client.Connect("127.0.0.1", 12345);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -401,6 +401,14 @@ namespace ENRC
             if (dgPlayer.SelectedItem != null)
             {
                 ReplaceInventory(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
+
+        private void mnuSetRandomStats_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                SetRandomStats(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
             }
         }
     }

@@ -172,7 +172,11 @@ namespace EPMConnector
                                 break;
 
                             case Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer:
-                                obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.IdMsgPrio>(ms);
+                                obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.DialogBoxData>(ms);
+                                break;
+
+                            case Eleon.Modding.CmdId.Event_DialogButtonIndex:
+                                obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.IntValue>(ms);
                                 break;
 
                             case Eleon.Modding.CmdId.Event_Playfield_Loaded:
@@ -487,7 +491,11 @@ namespace EPMConnector
                                 break;
 
                             case Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer:
-                                ProtoBuf.Serializer.Serialize<Eleon.Modding.IdMsgPrio>(ms, (Eleon.Modding.IdMsgPrio)p.data);
+                                ProtoBuf.Serializer.Serialize<Eleon.Modding.DialogBoxData>(ms, (Eleon.Modding.DialogBoxData)p.data);
+                                break;
+                                
+                            case Eleon.Modding.CmdId.Event_DialogButtonIndex:
+                                ProtoBuf.Serializer.Serialize<Eleon.Modding.IntValue>(ms, (Eleon.Modding.IntValue)p.data);
                                 break;
 
                             case Eleon.Modding.CmdId.Event_Playfield_Loaded:

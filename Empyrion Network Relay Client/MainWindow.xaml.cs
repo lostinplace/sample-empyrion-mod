@@ -362,7 +362,7 @@ namespace ENRC
                 return;
             }
 
-            EntitySpawn(System.Convert.ToInt32(wdInput.txtID.Text), wdInput.txtPrefabName.Text, wdInput.txtExportFile.Text, wdInput.txtPlayfield.Text);
+            EntitySpawn(System.Convert.ToInt32(wdInput.txtID.Text), wdInput.txtPrefabName.Text, wdInput.txtExportFile.Text, wdInput.txtPlayfield.Text, wdInput.txtEntityTypeName.Text);
             wdInput = null;
         }
 

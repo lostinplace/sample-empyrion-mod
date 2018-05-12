@@ -185,7 +185,12 @@ namespace ENRC
 
         private void Player_ShowDialog_SinglePlayer(int entityId, string message, byte prio = 2, float time = 10)
         {
-            SendRequest(Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, new Eleon.Modding.IdMsgPrio(entityId, message, prio, time));
+            Eleon.Modding.DialogBoxData dialogBoxData = new Eleon.Modding.DialogBoxData();
+            dialogBoxData.Id = entityId;
+            dialogBoxData.MsgText = message;
+            dialogBoxData.PosButtonText = "Ok";
+
+            SendRequest(Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, dialogBoxData);
         }
 
         private void Blueprint_Finish(int entityId)
@@ -198,7 +203,7 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
-        private void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield)
+        private void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName)
         {
             Eleon.Modding.EntitySpawnInfo spawnInfo;
             spawnInfo = new Eleon.Modding.EntitySpawnInfo();
@@ -206,6 +211,11 @@ namespace ENRC
             spawnInfo.exportedEntityDat = exportFile;
             spawnInfo.prefabName = prefabName;
             spawnInfo.playfield = Playfield;
+            if (entityTypeName == "")
+            {
+                entityTypeName = null;
+            }
+            spawnInfo.entityTypeName = entityTypeName;
 
             SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
         }

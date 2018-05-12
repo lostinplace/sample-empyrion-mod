@@ -117,7 +117,8 @@ namespace Eleon.Modding
         Request_InGameMessage_SinglePlayer, // IdMsgPrio (id = player id)
         Request_InGameMessage_AllPlayers,   // IdMsgPrio (ignore id)
         Request_InGameMessage_Faction,      // IdMsgPrio (id = faction id)
-        Request_ShowDialog_SinglePlayer,    // IdMsgPrio
+        Request_ShowDialog_SinglePlayer,    // DialogBoxData
+        Event_DialogButtonIndex,            // IntValue: which button has been pressed
 
         Event_Ok,
         Event_Error,                        // ErrorInfo
@@ -292,6 +293,14 @@ namespace Eleon.Modding
 
     [Obfuscation]
     [ProtoContract]
+    public class IntValue
+    {
+        [ProtoMember(1)]
+        public int Value;
+    }
+
+    [Obfuscation]
+    [ProtoContract]
     public class IdMsgPrio
     {
         [ProtoMember(1)]
@@ -314,6 +323,22 @@ namespace Eleon.Modding
             prio = nPrio;
             time = nTime;
         }
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public class DialogBoxData
+    {
+        // Note: if no button texts are given an "Ok" button is the default
+
+        [ProtoMember(1)]
+        public int Id;
+        [ProtoMember(2)]
+        public string MsgText;
+        [ProtoMember(3)]
+        public string PosButtonText;
+        [ProtoMember(4)]
+        public string NegButtonText;
     }
 
     [Obfuscation]
@@ -1197,6 +1222,8 @@ namespace Eleon.Modding
         public string Name;
         [ProtoMember(2)]
         public PdaStateChange StateChange;
+        [ProtoMember(3)]
+        public int PlayerId;
     }
 
     [Obfuscation]

@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("W3DG")]
 [assembly: AssemblyProduct("Empyrion Mod Server")]
-[assembly: AssemblyCopyright("Copyright ©  2016 - 2017")]
+[assembly: AssemblyCopyright("Copyright ©  2016 - 2018")]
 [assembly: AssemblyTrademark("Empyrion Mod Server")]
 [assembly: AssemblyCulture("")]
 

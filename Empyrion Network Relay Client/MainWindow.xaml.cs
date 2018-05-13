@@ -353,17 +353,23 @@ namespace ENRC
 
         private void mnuImportStructure_Click(object sender, RoutedEventArgs e)
         {
-            windows.SpawnEntity wdInput = new windows.SpawnEntity();
-                        wdInput.ShowDialog();
-
-            if (System.IO.File.Exists(wdInput.txtExportFile.Text) == false)
+            try
             {
-                mainWindowDataContext.output.Add("Export file not found");
-                return;
-            }
+                windows.SpawnEntity wdInput = new windows.SpawnEntity();
+                wdInput.ShowDialog();
 
-            EntitySpawn(System.Convert.ToInt32(wdInput.txtID.Text), wdInput.txtPrefabName.Text, wdInput.txtExportFile.Text, wdInput.txtPlayfield.Text, wdInput.txtEntityTypeName.Text);
-            wdInput = null;
+                if (wdInput.txtExportFile.Text != "" && System.IO.File.Exists(wdInput.txtExportFile.Text) == false)
+                {
+                    mainWindowDataContext.output.Add("Export file not found");
+                    return;
+                }
+
+                EntitySpawn(System.Convert.ToInt32(wdInput.txtID.Text), wdInput.txtPrefabName.Text, wdInput.txtExportFile.Text, wdInput.txtPlayfield.Text, wdInput.txtEntityTypeName.Text, wdInput.txtName.Text, wdInput.txtFactionGroup.Text, wdInput.txtFactionID.Text, wdInput.txtType.Text);
+                wdInput = null;
+            }
+            catch
+            {
+            }
         }
 
         private void btnGetNewID_Click(object sender, RoutedEventArgs e)

@@ -203,21 +203,36 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
-        private void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName)
+        private void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type)
         {
-            Eleon.Modding.EntitySpawnInfo spawnInfo;
-            spawnInfo = new Eleon.Modding.EntitySpawnInfo();
-            spawnInfo.forceEntityId = ID;
-            spawnInfo.exportedEntityDat = exportFile;
-            spawnInfo.prefabName = prefabName;
-            spawnInfo.playfield = Playfield;
-            if (entityTypeName == "")
+            try
             {
-                entityTypeName = null;
-            }
-            spawnInfo.entityTypeName = entityTypeName;
+                Eleon.Modding.EntitySpawnInfo spawnInfo;
+                spawnInfo = new Eleon.Modding.EntitySpawnInfo();
+                spawnInfo.forceEntityId = ID;
+                spawnInfo.exportedEntityDat = exportFile;
+                spawnInfo.prefabName = prefabName;
+                spawnInfo.playfield = Playfield;
+                if (exportFile == "")
+                {
+                    spawnInfo.name = name;
+                    spawnInfo.factionGroup = byte.Parse(factionGroup);
+                    spawnInfo.factionId = int.Parse(factionID);
+                    spawnInfo.pos = new Eleon.Modding.PVector3(0, 200, 0);
+                    spawnInfo.rot = new Eleon.Modding.PVector3();
+                    spawnInfo.type = byte.Parse(type);
+                    if (entityTypeName == "")
+                    {
+                        entityTypeName = null;
+                    }
+                    spawnInfo.entityTypeName = entityTypeName;
+                }
 
-            SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
+                SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
+            }
+            catch
+            {
+            }
         }
 
         private void Request_Entity_SetName(int ID, string Name)

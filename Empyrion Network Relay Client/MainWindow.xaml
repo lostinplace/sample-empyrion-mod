@@ -126,7 +126,7 @@
                     <MenuItem Header="Get BlockStatistics" x:Name="mnuGet_Structure_BlockStatistics" Click="mnuGet_Structure_BlockStatistics_Click"/>
                     <MenuItem Header="Touch" x:Name="mnuTouch" Click="mnuTouch_Click"/>
                     <MenuItem Header="Get Export Info" x:Name="mnuGetExportInfo" Click="mnuGetExportInfo_Click"/>
-                    <MenuItem Header="Import structure folder" x:Name="mnuImportStructure" Click="mnuImportStructure_Click"/>
+                    <MenuItem Header="Spawn structure" x:Name="mnuImportStructure" Click="mnuImportStructure_Click"/>
                     <MenuItem Header="Set name" x:Name="mnuSetName" Click="mnuSetName_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>

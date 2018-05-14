@@ -203,7 +203,7 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
-        private void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type)
+        public void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type, string NS, string Height, string EW, string X, string Y, string Z)
         {
             try
             {
@@ -218,13 +218,9 @@ namespace ENRC
                     spawnInfo.name = name;
                     spawnInfo.factionGroup = byte.Parse(factionGroup);
                     spawnInfo.factionId = int.Parse(factionID);
-                    spawnInfo.pos = new Eleon.Modding.PVector3(0, 200, 0);
-                    spawnInfo.rot = new Eleon.Modding.PVector3();
+                    spawnInfo.pos = new Eleon.Modding.PVector3(int.Parse(NS), int.Parse(Height), int.Parse(EW));
+                    spawnInfo.rot = new Eleon.Modding.PVector3(int.Parse(X), int.Parse(Y), int.Parse(Z));
                     spawnInfo.type = byte.Parse(type);
-                    if (entityTypeName == "")
-                    {
-                        entityTypeName = null;
-                    }
                     spawnInfo.entityTypeName = entityTypeName;
                 }
 

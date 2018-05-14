@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace ENRC.windows
 {
@@ -19,6 +7,8 @@ namespace ENRC.windows
     /// </summary>
     public partial class SpawnEntity : Window
     {
+        public MainWindow mainWd { get; set; }
+
         public SpawnEntity()
         {
             InitializeComponent();
@@ -27,7 +17,20 @@ namespace ENRC.windows
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            try
+            {
+
+                if (txtExportFile.Text != "" && System.IO.File.Exists(txtExportFile.Text) == false)
+                {
+                    mainWd.mainWindowDataContext.output.Add("Export file not found");
+                    return;
+                }
+
+                mainWd.EntitySpawn(System.Convert.ToInt32(txtID.Text), txtPrefabName.Text, txtExportFile.Text, txtPlayfield.Text, txtEntityTypeName.Text, txtName.Text, txtFactionGroup.Text, txtFactionID.Text, txtType.Text, txtNS.Text, txtHeight.Text, txtEW.Text, txtX.Text, txtY.Text, txtZ.Text);
+            }
+            catch
+            {
+            }
         }
     }
 }

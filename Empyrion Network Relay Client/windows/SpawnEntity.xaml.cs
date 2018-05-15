@@ -26,7 +26,7 @@ namespace ENRC.windows
                     return;
                 }
 
-                mainWd.EntitySpawn(System.Convert.ToInt32(txtID.Text), txtPrefabName.Text, txtExportFile.Text, txtPlayfield.Text, txtEntityTypeName.Text, txtName.Text, txtFactionGroup.Text, txtFactionID.Text, txtType.Text, txtNS.Text, txtHeight.Text, txtEW.Text, txtX.Text, txtY.Text, txtZ.Text);
+                mainWd.EntitySpawn(System.Convert.ToInt32(txtID.Text), txtPrefabName.Text, txtExportFile.Text, txtPlayfield.Text, txtEntityTypeName.Text, txtName.Text, txtFactionGroup.Text, txtFactionID.Text, txtType.Text, txtNS.Text, txtHeight.Text, txtEW.Text, txtX.Text, txtY.Text, txtZ.Text, txtPrefabDir.Text);
             }
             catch
             {

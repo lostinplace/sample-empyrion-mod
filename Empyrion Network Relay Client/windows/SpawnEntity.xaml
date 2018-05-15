@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ENRC.windows"
         mc:Ignorable="d"
-        Title="Spawn Entity" Height="514.667" Width="500">
+        Title="Spawn Entity" Height="580" Width="500">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
@@ -30,40 +31,43 @@
         <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">ID:</Label>
         <TextBox Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"  Margin="6" x:Name="txtID"/>
 
-        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">PrefabName:</Label>
-        <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"  Margin="6" x:Name="txtPrefabName"/>
+        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">PrefabDir:</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"  Margin="6" x:Name="txtPrefabDir"/>
 
-        <Label Grid.Column="0"  Grid.Row="2" VerticalAlignment="Center">Export file:</Label>
-        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"  Margin="6" x:Name="txtExportFile"/>
+        <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">PrefabName:</Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"  Margin="6" x:Name="txtPrefabName"/>
 
-        <Label Grid.Column="0"  Grid.Row="3" VerticalAlignment="Center">Playfield:</Label>
-        <TextBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"  Margin="6" x:Name="txtPlayfield"/>
+        <Label Grid.Column="0"  Grid.Row="3" VerticalAlignment="Center">Export file:</Label>
+        <TextBox Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"  Margin="6" x:Name="txtExportFile" ToolTip="optional: file path of an exported entity dat file. "/>
 
-        <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">Name:</Label>
-        <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"  Margin="6" x:Name="txtName"/>
+        <Label Grid.Column="0"  Grid.Row="4" VerticalAlignment="Center">Playfield:</Label>
+        <TextBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"  Margin="6" x:Name="txtPlayfield"/>
 
-        <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Type:</Label>
-        <TextBox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"  Margin="6" x:Name="txtType"/>
+        <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Name:</Label>
+        <TextBox Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2"  Margin="6" x:Name="txtName"/>
 
-        <Label Grid.Column="0"  Grid.Row="6" VerticalAlignment="Center">Entity Type Name:</Label>
-        <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2"  Margin="6" x:Name="txtEntityTypeName"/>
+        <Label Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">Type:</Label>
+        <TextBox Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2"  Margin="6" x:Name="txtType" ToolTip="Undef = 0, BA = 2, CV = 3, SV = 4, HV = 5, AstVoxel = 7"/>
 
-        <Label Grid.Column="0"  Grid.Row="7" VerticalAlignment="Center">Faction Group:</Label>
-        <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"  Margin="6" x:Name="txtFactionGroup"/>
+        <Label Grid.Column="0"  Grid.Row="7" VerticalAlignment="Center">EntityTypeName:</Label>
+        <TextBox Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2"  Margin="6" x:Name="txtEntityTypeName" ToolTip="'ZiraxMale', 'AlienCivilian1Fat', etc"/>
 
-        <Label Grid.Column="0"  Grid.Row="8" VerticalAlignment="Center">Faction ID:</Label>
-        <TextBox Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2"  Margin="6" x:Name="txtFactionID"/>
+        <Label Grid.Column="0"  Grid.Row="8" VerticalAlignment="Center">Faction Group:</Label>
+        <TextBox Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2"  Margin="6" x:Name="txtFactionGroup"/>
 
-        <Label Grid.Column="0"  Grid.Row="9" VerticalAlignment="Center">Coordinates:</Label>
-        <TextBox Grid.Column="1" Grid.Row="9"  Margin="6,6,0,6" x:Name="txtNS" HorizontalAlignment="Left" Width="70"/>
-        <TextBox Grid.Column="1" Grid.Row="9"  Margin="103,6,0,6" x:Name="txtHeight" HorizontalAlignment="Left" Width="70"/>
-        <TextBox Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2"  Margin="199,6,0,6" x:Name="txtEW" HorizontalAlignment="Left" Width="70"/>
+        <Label Grid.Column="0"  Grid.Row="9" VerticalAlignment="Center">Faction ID:</Label>
+        <TextBox Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2"  Margin="6" x:Name="txtFactionID"/>
 
-        <Label Grid.Column="0"  Grid.Row="10" VerticalAlignment="Center">Rotation:</Label>
-        <TextBox Grid.Column="1" Grid.Row="10"  Margin="6,6,0,6" x:Name="txtX" HorizontalAlignment="Left" Width="70"/>
-        <TextBox Grid.Column="1" Grid.Row="10"  Margin="104,6,0,6" x:Name="txtY" HorizontalAlignment="Left" Width="70"/>
-        <TextBox Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2"  Margin="199,6,0,6" x:Name="txtZ" HorizontalAlignment="Left" Width="70"/>
+        <Label Grid.Column="0"  Grid.Row="10" VerticalAlignment="Center">Coordinates:</Label>
+        <TextBox Grid.Column="1" Grid.Row="10"  Margin="6,6,0,6" x:Name="txtNS" HorizontalAlignment="Left" Width="70"/>
+        <TextBox Grid.Column="1" Grid.Row="10"  Margin="103,6,0,6" x:Name="txtHeight" HorizontalAlignment="Left" Width="70"/>
+        <TextBox Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2"  Margin="199,6,0,6" x:Name="txtEW" HorizontalAlignment="Left" Width="70"/>
 
-        <Button Grid.Column="2" Grid.Row="11" Margin="6" x:Name="btnOk" Click="btnOk_Click">Ok</Button>
+        <Label Grid.Column="0"  Grid.Row="11" VerticalAlignment="Center">Rotation:</Label>
+        <TextBox Grid.Column="1" Grid.Row="11"  Margin="6,6,0,6" x:Name="txtX" HorizontalAlignment="Left" Width="70"/>
+        <TextBox Grid.Column="1" Grid.Row="11"  Margin="104,6,0,6" x:Name="txtY" HorizontalAlignment="Left" Width="70"/>
+        <TextBox Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2"  Margin="199,6,0,6" x:Name="txtZ" HorizontalAlignment="Left" Width="70"/>
+
+        <Button Grid.Column="2" Grid.Row="12" Margin="6" x:Name="btnOk" Click="btnOk_Click">Ok</Button>
     </Grid>
 </Window>

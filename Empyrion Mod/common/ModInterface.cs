@@ -200,12 +200,15 @@ namespace Eleon.Modding
         [ProtoMember(8)]
         public string prefabName;
         [ProtoMember(9)]
-        public byte factionGroup;
+        public string prefabDir;
         [ProtoMember(10)]
-        public int factionId;
+        public byte factionGroup;
         [ProtoMember(11)]
+        public int factionId;
+        [ProtoMember(12)]
         public string exportedEntityDat;    // optional: file path of an exported entity dat file. 
                                             // remark: the values above will override the imported data from the .dat file, but you can null/0 these to avoid this.
+
         public EntitySpawnInfo()
         {
         }

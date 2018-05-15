@@ -203,18 +203,32 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
-        public void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type, string NS, string Height, string EW, string X, string Y, string Z)
+        public void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type, string NS, string Height, string EW, string X, string Y, string Z, string prefabDir)
         {
             try
             {
+                if (prefabName == "") { prefabName = null; }
+                if (exportFile == "") { exportFile = null; }
+                if (Playfield == "") { Playfield = null; }
+                if (entityTypeName == "") { entityTypeName = null; }
+                if (name == "") { name = null; }
+                if (factionGroup == "") { factionGroup = null; }
+                if (factionID == "") { factionID = null; }
+                if (NS == "") { NS = null; }
+                if (Height == "") { Height = null; }
+                if (EW == "") { EW = null; }
+                if (X == "") { X = null; }
+                if (Y == "") { Y = null; }
+                if (Z == "") { Z = null; }
+                if (prefabDir == "") { prefabDir = null; }
+
                 Eleon.Modding.EntitySpawnInfo spawnInfo;
                 spawnInfo = new Eleon.Modding.EntitySpawnInfo();
                 spawnInfo.forceEntityId = ID;
                 spawnInfo.exportedEntityDat = exportFile;
                 spawnInfo.prefabName = prefabName;
+                spawnInfo.prefabDir = prefabDir;
                 spawnInfo.playfield = Playfield;
-                if (exportFile == "")
-                {
                     spawnInfo.name = name;
                     spawnInfo.factionGroup = byte.Parse(factionGroup);
                     spawnInfo.factionId = int.Parse(factionID);
@@ -222,7 +236,6 @@ namespace ENRC
                     spawnInfo.rot = new Eleon.Modding.PVector3(int.Parse(X), int.Parse(Y), int.Parse(Z));
                     spawnInfo.type = byte.Parse(type);
                     spawnInfo.entityTypeName = entityTypeName;
-                }
 
                 SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
             }
@@ -235,7 +248,7 @@ namespace ENRC
         {
             Eleon.Modding.IdPlayfieldName pfName = new Eleon.Modding.IdPlayfieldName();
             pfName.id = ID;
-            pfName.name = Name; 
+            pfName.name = Name;
             SendRequest(Eleon.Modding.CmdId.Request_Entity_SetName, Eleon.Modding.CmdId.Request_Entity_SetName, pfName);
         }
 
@@ -246,12 +259,12 @@ namespace ENRC
 
         private void Entity_Destroy2(int entity_Id, string playfield)
         {
-            SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy2, Eleon.Modding.CmdId.Request_Entity_Destroy2, new Eleon.Modding.IdPlayfield(entity_Id,playfield));
+            SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy2, Eleon.Modding.CmdId.Request_Entity_Destroy2, new Eleon.Modding.IdPlayfield(entity_Id, playfield));
         }
 
         private void Request_Entity_Export(int entity_Id)
         {
-          SendRequest(Eleon.Modding.CmdId.Request_Entity_Export, Eleon.Modding.CmdId.Request_Entity_Export, new Eleon.Modding.EntityExportInfo(entity_Id, null, true));
+            SendRequest(Eleon.Modding.CmdId.Request_Entity_Export, Eleon.Modding.CmdId.Request_Entity_Export, new Eleon.Modding.EntityExportInfo(entity_Id, null, true));
         }
 
         private void GetBannedPlayers()
@@ -274,7 +287,7 @@ namespace ENRC
             Eleon.Modding.ItemStack[] Toolbelt = new Eleon.Modding.ItemStack[10];
             Eleon.Modding.ItemStack[] Backpack = new Eleon.Modding.ItemStack[40];
 
-            for (int i = 0; i <= 9;i++)
+            for (int i = 0; i <= 9; i++)
             {
                 Toolbelt[i].id = 558;
                 Toolbelt[i].count = i + 1;
@@ -286,7 +299,7 @@ namespace ENRC
                 Backpack[i].count = i + 1;
             }
 
-            SendRequest(Eleon.Modding.CmdId.Request_Player_SetInventory, Eleon.Modding.CmdId.Request_Player_SetInventory, new Eleon.Modding.Inventory(entity_Id, Toolbelt, Backpack)); 
+            SendRequest(Eleon.Modding.CmdId.Request_Player_SetInventory, Eleon.Modding.CmdId.Request_Player_SetInventory, new Eleon.Modding.Inventory(entity_Id, Toolbelt, Backpack));
         }
 
         private void SetRandomStats(int entity_Id)
@@ -338,7 +351,7 @@ namespace ENRC
         {
             Eleon.Modding.PlayerInfoSet pInfo = new Eleon.Modding.PlayerInfoSet();
             pInfo.entityId = entity_Id;
-            pInfo.sendLastNLogs = 3;            
+            pInfo.sendLastNLogs = 3;
             SendRequest(Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo);
         }
 
@@ -350,7 +363,7 @@ namespace ENRC
 
         private void Request_NewID()
         {
-             SendRequest(Eleon.Modding.CmdId.Request_NewEntityId, Eleon.Modding.CmdId.Request_NewEntityId, null);
+            SendRequest(Eleon.Modding.CmdId.Request_NewEntityId, Eleon.Modding.CmdId.Request_NewEntityId, null);
         }
         #endregion
 
@@ -576,7 +589,7 @@ namespace ENRC
                                         StructureInfo stI = new StructureInfo();
                                         stI.FromStructureInfo(g, kvp.Key);
 
-                                        output(string.Format("  id={0} name={1} type={2} #blocks={3} #devices={4} playfield={5} pos={6}/{7}/{8}", g.id, g.name, g.type, g.cntBlocks, g.cntDevices, kvp.Key, g.pos.x, g.pos.y, g.pos.z), p.cmd); 
+                                        output(string.Format("  id={0} name={1} type={2} #blocks={3} #devices={4} playfield={5} pos={6}/{7}/{8}", g.id, g.name, g.type, g.cntBlocks, g.cntDevices, kvp.Key, g.pos.x, g.pos.y, g.pos.z), p.cmd);
 
                                         System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.structures.Add(stI)));
                                     }
@@ -789,7 +802,7 @@ namespace ENRC
                         {
                             Eleon.Modding.ConsoleCommandInfo obj = (Eleon.Modding.ConsoleCommandInfo)p.data;
                             if (obj == null) { break; }
-                            output(string.Format("Player {0}; Console command: {1} Allowed: {2}",obj.playerEntityId, obj.command, obj.allowed),p.cmd);
+                            output(string.Format("Player {0}; Console command: {1} Allowed: {2}", obj.playerEntityId, obj.command, obj.allowed), p.cmd);
                         }
                         break;
 

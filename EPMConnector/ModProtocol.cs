@@ -176,7 +176,7 @@ namespace EPMConnector
                                 break;
 
                             case Eleon.Modding.CmdId.Event_DialogButtonIndex:
-                                obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.IntValue>(ms);
+                                obj = ProtoBuf.Serializer.Deserialize<Eleon.Modding.IdAndIntValue>(ms);
                                 break;
 
                             case Eleon.Modding.CmdId.Event_Playfield_Loaded:
@@ -495,7 +495,7 @@ namespace EPMConnector
                                 break;
                                 
                             case Eleon.Modding.CmdId.Event_DialogButtonIndex:
-                                ProtoBuf.Serializer.Serialize<Eleon.Modding.IntValue>(ms, (Eleon.Modding.IntValue)p.data);
+                                ProtoBuf.Serializer.Serialize<Eleon.Modding.IdAndIntValue>(ms, (Eleon.Modding.IdAndIntValue)p.data);
                                 break;
 
                             case Eleon.Modding.CmdId.Event_Playfield_Loaded:

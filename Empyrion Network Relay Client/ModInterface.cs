@@ -203,7 +203,7 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
-        public void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type, string NS, string Height, string EW, string X, string Y, string Z, string prefabDir)
+        public void EntitySpawn(string ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type, string NS, string Height, string EW, string X, string Y, string Z, string prefabDir)
         {
             try
             {
@@ -221,26 +221,28 @@ namespace ENRC
                 if (Y == "") { Y = null; }
                 if (Z == "") { Z = null; }
                 if (prefabDir == "") { prefabDir = null; }
+                if (type == "") { type = null; }
 
                 Eleon.Modding.EntitySpawnInfo spawnInfo;
                 spawnInfo = new Eleon.Modding.EntitySpawnInfo();
-                spawnInfo.forceEntityId = ID;
+                spawnInfo.forceEntityId = System.Convert.ToInt32(ID);
                 spawnInfo.exportedEntityDat = exportFile;
                 spawnInfo.prefabName = prefabName;
                 spawnInfo.prefabDir = prefabDir;
                 spawnInfo.playfield = Playfield;
                     spawnInfo.name = name;
-                    spawnInfo.factionGroup = byte.Parse(factionGroup);
-                    spawnInfo.factionId = int.Parse(factionID);
-                    spawnInfo.pos = new Eleon.Modding.PVector3(int.Parse(NS), int.Parse(Height), int.Parse(EW));
-                    spawnInfo.rot = new Eleon.Modding.PVector3(int.Parse(X), int.Parse(Y), int.Parse(Z));
-                    spawnInfo.type = byte.Parse(type);
+                if (factionGroup != null) { spawnInfo.factionGroup = byte.Parse(factionGroup); }
+                if (factionID != null) { spawnInfo.factionId = int.Parse(factionID); }
+                if (NS != null && Height != null && EW != null) { spawnInfo.pos = new Eleon.Modding.PVector3(int.Parse(NS), int.Parse(Height), int.Parse(EW)); }
+                if (X != null && Y != null && Z != null) { spawnInfo.rot = new Eleon.Modding.PVector3(int.Parse(X), int.Parse(Y), int.Parse(Z)); }
+                if (type != null) { spawnInfo.type = byte.Parse(type); }
                     spawnInfo.entityTypeName = entityTypeName;
 
                 SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
             }
-            catch
+            catch (Exception ex)
             {
+                output(string.Format("Exception: {0}", ex.Message),Eleon.Modding.CmdId.Event_Error);
             }
         }
 

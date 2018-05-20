@@ -856,6 +856,15 @@ namespace ENRC
             bool allowOutput = true;
             if (mainWindowDataContext != null && mainWindowDataContext.output != null && System.Windows.Application.Current != null)
             {
+                if (s.Contains("DisconnectedDelegate"))
+                {
+                    mainWindowDataContext.Connected = "Disconnected";
+                }
+                else if (s.Contains("ModInterface: Connected"))
+                {
+                    mainWindowDataContext.Connected = "Connected";
+                }
+
                 switch (cmdID)
                 {
                     case Eleon.Modding.CmdId.Event_Playfield_List:

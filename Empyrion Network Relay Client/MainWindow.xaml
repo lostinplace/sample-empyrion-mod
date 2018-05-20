@@ -78,8 +78,9 @@
         <Button Margin="2" Grid.Column="0" Grid.Row="23" x:Name="btnReloadPlayfield" Click="btnReloadPlayfield_Click" Content="Reload playfield files"/>
         <Button Margin="2" Grid.Column="0" Grid.Row="24" x:Name="btnGetBannedPlayers" Click="btnGetBannedPlayers_Click" Content="Get banned players"/>
 
-        <TextBox Margin="6" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="7" x:Name="txtCommand" KeyUp="txtCommand_KeyUp"/>
-        <Button Margin="2" Grid.Column="9" Grid.Row="0" x:Name="btnSentCommand" Click="btnSentCommand_Click" Content="Sent command"/>
+        <TextBox Margin="6" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="6" x:Name="txtCommand" KeyUp="txtCommand_KeyUp"/>
+        <Button Margin="2" Grid.Column="7" Grid.Row="0" x:Name="btnSentCommand" Click="btnSentCommand_Click" Content="Sent command"/>
+        <Label  Margin="2" Grid.Column="8" Grid.Row="0" Content="{Binding Connected}" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
         <DataGrid Margin="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayfields}" IsReadOnly="True">
             <DataGrid.Columns>

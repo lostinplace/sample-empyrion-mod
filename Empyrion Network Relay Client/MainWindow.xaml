@@ -78,8 +78,9 @@
         <Button Margin="2" Grid.Column="0" Grid.Row="23" x:Name="btnReloadPlayfield" Click="btnReloadPlayfield_Click" Content="Reload playfield files"/>
         <Button Margin="2" Grid.Column="0" Grid.Row="24" x:Name="btnGetBannedPlayers" Click="btnGetBannedPlayers_Click" Content="Get banned players"/>
 
-        <TextBox Margin="6" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="7" x:Name="txtCommand" KeyUp="txtCommand_KeyUp"/>
-        <Button Margin="2" Grid.Column="9" Grid.Row="0" x:Name="btnSentCommand" Click="btnSentCommand_Click" Content="Sent command"/>
+        <TextBox Margin="6" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="6" x:Name="txtCommand" KeyUp="txtCommand_KeyUp"/>
+        <Button Margin="2" Grid.Column="7" Grid.Row="0" x:Name="btnSentCommand" Click="btnSentCommand_Click" Content="Sent command"/>
+        <Label  Margin="2" Grid.Column="8" Grid.Row="0" Content="{Binding Connected}" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
         <DataGrid Margin="2" Grid.Column="1" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="1" AutoGenerateColumns="False" ItemsSource="{Binding onlinePlayfields}" IsReadOnly="True">
             <DataGrid.Columns>
@@ -126,7 +127,7 @@
                     <MenuItem Header="Get BlockStatistics" x:Name="mnuGet_Structure_BlockStatistics" Click="mnuGet_Structure_BlockStatistics_Click"/>
                     <MenuItem Header="Touch" x:Name="mnuTouch" Click="mnuTouch_Click"/>
                     <MenuItem Header="Get Export Info" x:Name="mnuGetExportInfo" Click="mnuGetExportInfo_Click"/>
-                    <MenuItem Header="Import structure folder" x:Name="mnuImportStructure" Click="mnuImportStructure_Click"/>
+                    <MenuItem Header="Spawn structure" x:Name="mnuImportStructure" Click="mnuImportStructure_Click"/>
                     <MenuItem Header="Set name" x:Name="mnuSetName" Click="mnuSetName_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
@@ -196,6 +197,10 @@
                     <MenuItem Header="Finish Blueprint" x:Name="mnuPlayerFinishBP" Click="mnuPlayerFinishBP_Click"/>
                     <MenuItem Header="Item Exchange" x:Name="mnuItemExchange" Click="mnuItemExchange_Click"/>
                     <MenuItem Header="Get and remove inventory" x:Name="mnuGetAndRemoveInventory" Click="mnuGetAndRemoveInventory_Click"/>
+                    <MenuItem Header="Add a few items" x:Name="mnuAddItems" Click="mnuAddItems_Click"/>
+                    <MenuItem Header="Replace inventory" x:Name="mnuReplaceInventory" Click="mnuReplaceInventory_Click"/>
+                    <MenuItem Header="Set random stats" x:Name="mnuSetRandomStats" Click="mnuSetRandomStats_Click"/>
+                    <MenuItem Header="Request 3 last client logs" x:Name="mnuRequestLastLogs" Click="mnuRequestLastLogs_Click"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

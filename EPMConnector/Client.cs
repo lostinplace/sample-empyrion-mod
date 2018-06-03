@@ -44,7 +44,7 @@ namespace EPMConnector
                     {
                         TcpClient tcpClient = new TcpClient(this.gameServerIp, this.gameServerPort);
                         client = new ModProtocol(tcpClient, PackageReceivedDelegate, DisconnectedDelegate);
-                        ClientMessages("ModInterface: Connected with " + client);
+                        ClientMessages("ModInterface: Connected with " + client + " over port " + this.gameServerPort);
 
                         OnConnected?.Invoke();
                     }

@@ -117,7 +117,8 @@ namespace Eleon.Modding
         Request_InGameMessage_SinglePlayer, // IdMsgPrio (id = player id)
         Request_InGameMessage_AllPlayers,   // IdMsgPrio (ignore id)
         Request_InGameMessage_Faction,      // IdMsgPrio (id = faction id)
-        Request_ShowDialog_SinglePlayer,    // IdMsgPrio
+        Request_ShowDialog_SinglePlayer,    // DialogBoxData
+        Event_DialogButtonIndex,            // IntValue: which button has been pressed
 
         Event_Ok,
         Event_Error,                        // ErrorInfo
@@ -193,16 +194,21 @@ namespace Eleon.Modding
         [ProtoMember(5)]
         public string name;
         [ProtoMember(6)]
-        public byte type;   // BA = 2, CV = 3, SV = 4, HV = 5, AstVoxel = 7
+        public byte type;               // set either this: Undef = 0, BA = 2, CV = 3, SV = 4, HV = 5, AstVoxel = 7
         [ProtoMember(7)]
-        public string prefabName;
+        public string entityTypeName;   // ... or set this to f.e. 'ZiraxMale', 'AlienCivilian1Fat', etc
         [ProtoMember(8)]
-        public byte factionGroup;
+        public string prefabName;
         [ProtoMember(9)]
-        public int factionId;
+        public string prefabDir;
         [ProtoMember(10)]
+        public byte factionGroup;
+        [ProtoMember(11)]
+        public int factionId;
+        [ProtoMember(12)]
         public string exportedEntityDat;    // optional: file path of an exported entity dat file. 
                                             // remark: the values above will override the imported data from the .dat file, but you can null/0 these to avoid this.
+
         public EntitySpawnInfo()
         {
         }
@@ -290,6 +296,14 @@ namespace Eleon.Modding
 
     [Obfuscation]
     [ProtoContract]
+    public class IntValue
+    {
+        [ProtoMember(1)]
+        public int Value;
+    }
+
+    [Obfuscation]
+    [ProtoContract]
     public class IdMsgPrio
     {
         [ProtoMember(1)]
@@ -312,6 +326,22 @@ namespace Eleon.Modding
             prio = nPrio;
             time = nTime;
         }
+    }
+
+    [Obfuscation]
+    [ProtoContract]
+    public class DialogBoxData
+    {
+        // Note: if no button texts are given an "Ok" button is the default
+
+        [ProtoMember(1)]
+        public int Id;
+        [ProtoMember(2)]
+        public string MsgText;
+        [ProtoMember(3)]
+        public string PosButtonText;
+        [ProtoMember(4)]
+        public string NegButtonText;
     }
 
     [Obfuscation]
@@ -386,7 +416,7 @@ namespace Eleon.Modding
         [ProtoMember(16)]
         public List<int> dockedShips;
         [ProtoMember(17)]
-        public byte coreType;  // 0 = no, 1 = the core of the player, 2 = admin core, 3 = alien core, 4 = admin alien core
+        public sbyte coreType;  // -1 - data not valid yet, 0 = no, 1 = the core of the player, 2 = admin core, 3 = alien core, 4 = admin alien core
         [ProtoMember(18)]
         public int pilotId;
     }
@@ -764,6 +794,12 @@ namespace Eleon.Modding
         public byte? factionGroup;
         [ProtoMember(19)]
         public int? factionId;
+        [ProtoMember(20)]
+        public byte? factionRole;  // Founder = 0, Admin = 1, Member = 2, NotSet = 3
+        [ProtoMember(21)]
+        public byte? sendLastNLogs;
+        [ProtoMember(22)]
+        public float? bpRemainingTime;
 
         public PlayerInfoSet()
         {
@@ -1189,6 +1225,8 @@ namespace Eleon.Modding
         public string Name;
         [ProtoMember(2)]
         public PdaStateChange StateChange;
+        [ProtoMember(3)]
+        public int PlayerId;
     }
 
     [Obfuscation]

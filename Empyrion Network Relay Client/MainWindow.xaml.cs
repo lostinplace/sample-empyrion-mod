@@ -353,17 +353,9 @@ namespace ENRC
 
         private void mnuImportStructure_Click(object sender, RoutedEventArgs e)
         {
-            windows.SpawnEntity wdInput = new windows.SpawnEntity();
-                        wdInput.ShowDialog();
-
-            if (System.IO.File.Exists(wdInput.txtExportFile.Text) == false)
-            {
-                mainWindowDataContext.output.Add("Export file not found");
-                return;
-            }
-
-            EntitySpawn(System.Convert.ToInt32(wdInput.txtID.Text), wdInput.txtPrefabName.Text, wdInput.txtExportFile.Text, wdInput.txtPlayfield.Text);
-            wdInput = null;
+                windows.SpawnEntity wdInput = new windows.SpawnEntity();
+            wdInput.mainWd = this;
+            wdInput.Show();
         }
 
         private void btnGetNewID_Click(object sender, RoutedEventArgs e)
@@ -385,6 +377,38 @@ namespace ENRC
                 catch
                 {
                 }
+            }
+        }
+
+        private void mnuAddItems_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                AddItems(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }      
+        }
+
+        private void mnuReplaceInventory_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                ReplaceInventory(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
+
+        private void mnuSetRandomStats_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                SetRandomStats(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
+            }
+        }
+
+        private void mnuRequestLastLogs_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgPlayer.SelectedItem != null)
+            {
+                RequestLastLogs(((data.PlayerInfo)dgPlayer.SelectedItem).entityId);
             }
         }
     }

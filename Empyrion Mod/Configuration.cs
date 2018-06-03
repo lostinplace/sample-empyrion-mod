@@ -10,7 +10,7 @@ public class Configuration
     public Configuration()
     {
         GameServerIp = "127.0.0.1";
-        GameServerApiPort = 12345;
+        GameServerApiPort = 32345;
     }
 
     public static Configuration GetConfiguration(String filePath)

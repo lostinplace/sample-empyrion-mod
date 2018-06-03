@@ -185,7 +185,12 @@ namespace ENRC
 
         private void Player_ShowDialog_SinglePlayer(int entityId, string message, byte prio = 2, float time = 10)
         {
-            SendRequest(Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, new Eleon.Modding.IdMsgPrio(entityId, message, prio, time));
+            Eleon.Modding.DialogBoxData dialogBoxData = new Eleon.Modding.DialogBoxData();
+            dialogBoxData.Id = entityId;
+            dialogBoxData.MsgText = message;
+            dialogBoxData.PosButtonText = "Ok";
+
+            SendRequest(Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, Eleon.Modding.CmdId.Request_ShowDialog_SinglePlayer, dialogBoxData);
         }
 
         private void Blueprint_Finish(int entityId)
@@ -198,23 +203,54 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_ConsoleCommand, Eleon.Modding.CmdId.Request_ConsoleCommand, new Eleon.Modding.PString(command));
         }
 
-        private void EntitySpawn(int ID, string prefabName, string exportFile, string Playfield)
+        public void EntitySpawn(string ID, string prefabName, string exportFile, string Playfield, string entityTypeName, string name, string factionGroup, string factionID, string type, string NS, string Height, string EW, string X, string Y, string Z, string prefabDir)
         {
-            Eleon.Modding.EntitySpawnInfo spawnInfo;
-            spawnInfo = new Eleon.Modding.EntitySpawnInfo();
-            spawnInfo.forceEntityId = ID;
-            spawnInfo.exportedEntityDat = exportFile;
-            spawnInfo.prefabName = prefabName;
-            spawnInfo.playfield = Playfield;
+            try
+            {
+                if (prefabName == "") { prefabName = null; }
+                if (exportFile == "") { exportFile = null; }
+                if (Playfield == "") { Playfield = null; }
+                if (entityTypeName == "") { entityTypeName = null; }
+                if (name == "") { name = null; }
+                if (factionGroup == "") { factionGroup = null; }
+                if (factionID == "") { factionID = null; }
+                if (NS == "") { NS = null; }
+                if (Height == "") { Height = null; }
+                if (EW == "") { EW = null; }
+                if (X == "") { X = null; }
+                if (Y == "") { Y = null; }
+                if (Z == "") { Z = null; }
+                if (prefabDir == "") { prefabDir = null; }
+                if (type == "") { type = null; }
 
-            SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
+                Eleon.Modding.EntitySpawnInfo spawnInfo;
+                spawnInfo = new Eleon.Modding.EntitySpawnInfo();
+                spawnInfo.forceEntityId = System.Convert.ToInt32(ID);
+                spawnInfo.exportedEntityDat = exportFile;
+                spawnInfo.prefabName = prefabName;
+                spawnInfo.prefabDir = prefabDir;
+                spawnInfo.playfield = Playfield;
+                    spawnInfo.name = name;
+                if (factionGroup != null) { spawnInfo.factionGroup = byte.Parse(factionGroup); }
+                if (factionID != null) { spawnInfo.factionId = int.Parse(factionID); }
+                if (NS != null && Height != null && EW != null) { spawnInfo.pos = new Eleon.Modding.PVector3(int.Parse(NS), int.Parse(Height), int.Parse(EW)); }
+                if (X != null && Y != null && Z != null) { spawnInfo.rot = new Eleon.Modding.PVector3(int.Parse(X), int.Parse(Y), int.Parse(Z)); }
+                if (type != null) { spawnInfo.type = byte.Parse(type); }
+                    spawnInfo.entityTypeName = entityTypeName;
+
+                SendRequest(Eleon.Modding.CmdId.Request_Entity_Spawn, Eleon.Modding.CmdId.Request_Entity_Spawn, spawnInfo);
+            }
+            catch (Exception ex)
+            {
+                output(string.Format("Exception: {0}", ex.Message),Eleon.Modding.CmdId.Event_Error);
+            }
         }
 
         private void Request_Entity_SetName(int ID, string Name)
         {
             Eleon.Modding.IdPlayfieldName pfName = new Eleon.Modding.IdPlayfieldName();
             pfName.id = ID;
-            pfName.name = Name; 
+            pfName.name = Name;
             SendRequest(Eleon.Modding.CmdId.Request_Entity_SetName, Eleon.Modding.CmdId.Request_Entity_SetName, pfName);
         }
 
@@ -225,12 +261,12 @@ namespace ENRC
 
         private void Entity_Destroy2(int entity_Id, string playfield)
         {
-            SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy2, Eleon.Modding.CmdId.Request_Entity_Destroy2, new Eleon.Modding.IdPlayfield(entity_Id,playfield));
+            SendRequest(Eleon.Modding.CmdId.Request_Entity_Destroy2, Eleon.Modding.CmdId.Request_Entity_Destroy2, new Eleon.Modding.IdPlayfield(entity_Id, playfield));
         }
 
         private void Request_Entity_Export(int entity_Id)
         {
-          SendRequest(Eleon.Modding.CmdId.Request_Entity_Export, Eleon.Modding.CmdId.Request_Entity_Export, new Eleon.Modding.EntityExportInfo(entity_Id, null, true));
+            SendRequest(Eleon.Modding.CmdId.Request_Entity_Export, Eleon.Modding.CmdId.Request_Entity_Export, new Eleon.Modding.EntityExportInfo(entity_Id, null, true));
         }
 
         private void GetBannedPlayers()
@@ -243,6 +279,84 @@ namespace ENRC
             SendRequest(Eleon.Modding.CmdId.Request_Player_GetAndRemoveInventory, Eleon.Modding.CmdId.Request_Player_GetAndRemoveInventory, new Eleon.Modding.Id(entity_Id));
         }
 
+        private void AddItems(int entity_Id)
+        {
+            SendRequest(Eleon.Modding.CmdId.Request_Player_AddItem, Eleon.Modding.CmdId.Request_Player_AddItem, new Eleon.Modding.ItemStack(558, 200)); // Add 200 cores
+        }
+
+        private void ReplaceInventory(int entity_Id)
+        {
+            Eleon.Modding.ItemStack[] Toolbelt = new Eleon.Modding.ItemStack[10];
+            Eleon.Modding.ItemStack[] Backpack = new Eleon.Modding.ItemStack[40];
+
+            for (int i = 0; i <= 9; i++)
+            {
+                Toolbelt[i].id = 558;
+                Toolbelt[i].count = i + 1;
+            }
+
+            for (int i = 0; i <= 39; i++)
+            {
+                Backpack[i].id = 558;
+                Backpack[i].count = i + 1;
+            }
+
+            SendRequest(Eleon.Modding.CmdId.Request_Player_SetInventory, Eleon.Modding.CmdId.Request_Player_SetInventory, new Eleon.Modding.Inventory(entity_Id, Toolbelt, Backpack));
+        }
+
+        private void SetRandomStats(int entity_Id)
+        {
+            Random ran = new Random();
+
+            Eleon.Modding.PlayerInfoSet pInfo = new Eleon.Modding.PlayerInfoSet();
+            pInfo.entityId = entity_Id;
+
+            switch (ran.Next(1, 8))
+            {
+                case 1:
+                    pInfo.health = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed health to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.health), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 2:
+                    pInfo.healthMax = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed healthMax to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.healthMax), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 3:
+                    pInfo.experiencePoints = ran.Next(10000, 250000);
+                    output(string.Format("SendRequest: Command {0} Changed experiencePoints to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.experiencePoints), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 4:
+                    pInfo.upgradePoints = ran.Next(100, 1000);
+                    output(string.Format("SendRequest: Command {0} Changed upgradePoints to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.upgradePoints), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 5:
+                    pInfo.stamina = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed stamina to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.stamina), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 6:
+                    pInfo.staminaMax = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed staminaMax to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.staminaMax), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 7:
+                    pInfo.food = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed stamina to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.food), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+                case 8:
+                    pInfo.foodMax = ran.Next(100, 5000);
+                    output(string.Format("SendRequest: Command {0} Changed staminaMax to: {1}", Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo.foodMax), Eleon.Modding.CmdId.Request_Player_SetPlayerInfo);
+                    break;
+            }
+            SendRequest(Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo);
+        }
+
+        private void RequestLastLogs(int entity_Id)
+        {
+            Eleon.Modding.PlayerInfoSet pInfo = new Eleon.Modding.PlayerInfoSet();
+            pInfo.entityId = entity_Id;
+            pInfo.sendLastNLogs = 3;
+            SendRequest(Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, Eleon.Modding.CmdId.Request_Player_SetPlayerInfo, pInfo);
+        }
+
         private void ItemExchange(int entity_Id)
         {
             Eleon.Modding.ItemStack[] itStack = new Eleon.Modding.ItemStack[] { new Eleon.Modding.ItemStack(2053, 1) };
@@ -251,7 +365,7 @@ namespace ENRC
 
         private void Request_NewID()
         {
-             SendRequest(Eleon.Modding.CmdId.Request_NewEntityId, Eleon.Modding.CmdId.Request_NewEntityId, null);
+            SendRequest(Eleon.Modding.CmdId.Request_NewEntityId, Eleon.Modding.CmdId.Request_NewEntityId, null);
         }
         #endregion
 
@@ -477,7 +591,7 @@ namespace ENRC
                                         StructureInfo stI = new StructureInfo();
                                         stI.FromStructureInfo(g, kvp.Key);
 
-                                        output(string.Format("  id={0} name={1} type={2} #blocks={3} #devices={4} playfield={5} pos={6}/{7}/{8}", g.id, g.name, g.type, g.cntBlocks, g.cntDevices, kvp.Key, g.pos.x, g.pos.y, g.pos.z), p.cmd); 
+                                        output(string.Format("  id={0} name={1} type={2} #blocks={3} #devices={4} playfield={5} pos={6}/{7}/{8}", g.id, g.name, g.type, g.cntBlocks, g.cntDevices, kvp.Key, g.pos.x, g.pos.y, g.pos.z), p.cmd);
 
                                         System.Windows.Application.Current.Dispatcher.Invoke((Action)(() => mainWindowDataContext.structures.Add(stI)));
                                     }
@@ -690,7 +804,7 @@ namespace ENRC
                         {
                             Eleon.Modding.ConsoleCommandInfo obj = (Eleon.Modding.ConsoleCommandInfo)p.data;
                             if (obj == null) { break; }
-                            output(string.Format("Player {0}; Console command: {1} Allowed: {2}",obj.playerEntityId, obj.command, obj.allowed),p.cmd);
+                            output(string.Format("Player {0}; Console command: {1} Allowed: {2}", obj.playerEntityId, obj.command, obj.allowed), p.cmd);
                         }
                         break;
 
@@ -744,6 +858,15 @@ namespace ENRC
             bool allowOutput = true;
             if (mainWindowDataContext != null && mainWindowDataContext.output != null && System.Windows.Application.Current != null)
             {
+                if (s.Contains("DisconnectedDelegate"))
+                {
+                    mainWindowDataContext.Connected = "Disconnected";
+                }
+                else if (s.Contains("ModInterface: Connected"))
+                {
+                    mainWindowDataContext.Connected = "Connected";
+                }
+
                 switch (cmdID)
                 {
                     case Eleon.Modding.CmdId.Event_Playfield_List:

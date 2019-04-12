@@ -687,12 +687,18 @@ namespace EPMConnector
                         writerStream.Write((Int32)p.clientId);
                         writerStream.Write((UInt16)p.seqNr);
                         byte[] data = ms.GetBuffer();
+
                         int len = (int)ms.Length;
                         writerStream.Write((Int32)len);
-                        if (len > 0)
+
+                        int offset = 0;
+                        do
                         {
-                            writerStream.Write(data, 0, len);
-                        }
+                            int sendLen = Math.Min(8192, len);
+                            writerStream.Write(data, offset, sendLen);
+                            len -= sendLen;
+                            offset += sendLen;
+                        } while (len > 0);
                     }
                     writerStream.Flush();
                 }

@@ -104,6 +104,8 @@ public class ModTCPServer {
                     }
 
                     TcpClient tcpClient = tcpListener.AcceptTcpClient();        // blocks until a client connects
+                    tcpClient.ReceiveBufferSize = 10 * 1024 * 1024;
+                    tcpClient.SendBufferSize = 10 * 1024 * 1024;
 
                     Console.WriteLine("New connection");
 

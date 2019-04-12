@@ -43,6 +43,9 @@ namespace EPMConnector
                     try
                     {
                         TcpClient tcpClient = new TcpClient(this.gameServerIp, this.gameServerPort);
+                        tcpClient.ReceiveBufferSize = 10 * 1024 * 1024;
+                        tcpClient.SendBufferSize = 10 * 1024 * 1024;
+
                         client = new ModProtocol(tcpClient, PackageReceivedDelegate, DisconnectedDelegate);
                         ClientMessages("ModInterface: Connected with " + client + " over port " + this.gameServerPort);
 

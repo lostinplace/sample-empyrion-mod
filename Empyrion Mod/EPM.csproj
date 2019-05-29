@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>EPM</RootNamespace>
     <AssemblyName>EmpyrionNetworkRelayMod</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <TargetFrameworkProfile />
@@ -40,7 +40,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="common\ModInterface.cs" />
     <Compile Include="..\EPMConnector\ModLog.cs">
       <Link>common\ModLog.cs</Link>
     </Compile>

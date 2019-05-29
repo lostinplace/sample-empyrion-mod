@@ -17,7 +17,7 @@ namespace ENRC
             client = new Client(1234);
             client.GameEventReceived += onGameEvent;
             client.ClientMessages += output;
-            client.Connect("127.0.0.1", 32345);
+            client.Connect("127.0.0.1", 12345);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("W3DG")]
 [assembly: AssemblyProduct("Empyrion Mod")]
-[assembly: AssemblyCopyright("Copyright ©  2016 - 2018")]
+[assembly: AssemblyCopyright("Copyright ©  2016 - 2019")]
 [assembly: AssemblyTrademark("Empyrion Mod")]
 [assembly: AssemblyCulture("")]
 
